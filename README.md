@@ -1,6 +1,6 @@
 Solitaire 3-2-1 "Father's Edition"
 
-Play the Game Here! (※公開後にURLを変更してください)
+https://crazysun0724.github.io/solitaire-321/
 
 A unique Klondike Solitaire variant loved by my late father. The game offers a perfect balance of challenge and accomplishment, starting hard and gradually becoming easier as you progress.
 
@@ -9,7 +9,9 @@ A unique Klondike Solitaire variant loved by my late father. The game offers a p
 The basic rules are the same as standard Klondike Solitaire. However, the game progresses in 3 phases:
 
 Draw 3 : Draw 3 cards at a time.
+
 Draw 2 : Once the stock is empty, it recycles, and you draw 2 cards.
+
 Draw 1 : Recycles again, drawing 1 card at a time.
 
 ⚠️ Game Over: If you empty the stock in the 'Draw 1' phase, the game is over!
