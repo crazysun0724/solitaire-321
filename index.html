@@ -128,7 +128,7 @@
             flex: 1;
             min-height: 0;
             align-items: flex-start;
-            overflow-y: hidden; /* 動的に調整されるためスクロール不要に変更 */
+            overflow-y: hidden; 
             padding-bottom: 20px;
         }
 
@@ -164,7 +164,6 @@
             backdrop-filter: blur(4px);
         }
 
-        /* モーダル内のカスタムスクロールバー */
         .custom-scrollbar::-webkit-scrollbar {
             width: 4px;
         }
@@ -205,44 +204,69 @@
         Created with Gemini 3.1 Pro
     </div>
 
-    <div class="fixed top-3 left-3 sm:top-5 sm:left-5 z-50 pointer-events-none">
-        <div class="bg-black/20 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg backdrop-blur-sm border border-white/10 shadow-md">
-            <div id="phase-display" class="text-sm sm:text-base font-semibold text-white/90 transition-colors leading-none flex items-baseline gap-1 pointer-events-auto">
-                Draw: <span id="draw-count-ui" class="text-yellow-300 text-lg sm:text-xl leading-none">3</span>
+    <!-- UI Header -->
+    <div class="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+        <div class="max-w-2xl mx-auto w-full pt-3 sm:pt-5 px-1 sm:px-0">
+            <div class="grid grid-cols-7 gap-1 sm:gap-2 w-full items-start">
+                
+                <div class="col-span-2 flex justify-center pointer-events-auto relative left-1.5 sm:left-3">
+                    <div class="bg-black/20 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg backdrop-blur-sm border border-white/10 shadow-md">
+                        <div id="phase-display" class="text-sm sm:text-base font-semibold text-white/90 transition-colors leading-none flex items-baseline gap-1">
+                            Draw: <span id="draw-count-ui" class="text-yellow-300 text-lg sm:text-xl leading-none">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-1"></div>
+
+                <div class="col-span-4 flex justify-end gap-1 sm:gap-2 pointer-events-auto">
+                    <button id="help-btn" onclick="showHelpModal()" title="Rules & Story" class="p-2 sm:p-2.5 bg-green-600 hover:bg-green-500 rounded shadow-md transition text-white flex items-center justify-center">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </button>
+                    <button id="sound-btn" onclick="toggleSound()" title="Sound: OFF" class="p-2 sm:p-2.5 bg-blue-900/50 hover:bg-blue-800/50 rounded border border-blue-500/50 transition text-blue-400 shadow-md flex items-center justify-center">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                    </button>
+                    <button id="hint-btn" onclick="toggleHint()" title="Hint: OFF" class="p-2 sm:p-2.5 bg-yellow-900/50 hover:bg-yellow-800/50 rounded border border-yellow-500/50 transition text-yellow-400 shadow-md flex items-center justify-center">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M8.464 15.536a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                    </button>
+                    <button onclick="showConfirmModal()" title="Restart" class="p-2 sm:p-2.5 bg-red-600 hover:bg-red-500 rounded shadow-md transition text-white flex items-center justify-center">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="fixed top-3 right-3 sm:top-5 sm:right-5 z-50 flex gap-2">
-        <button id="help-btn" onclick="showHelpModal()" title="Rules" class="p-2 sm:p-2.5 bg-green-600 hover:bg-green-500 rounded shadow-md transition text-white flex items-center justify-center">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        </button>
-        <button id="sound-btn" onclick="toggleSound()" title="Sound: OFF" class="p-2 sm:p-2.5 bg-blue-900/50 hover:bg-blue-800/50 rounded border border-blue-500/50 transition text-blue-400 shadow-md flex items-center justify-center">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
-        </button>
-        <button id="hint-btn" onclick="toggleHint()" title="Hint: OFF" class="p-2 sm:p-2.5 bg-yellow-900/50 hover:bg-yellow-800/50 rounded border border-yellow-500/50 transition text-yellow-400 shadow-md flex items-center justify-center">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M8.464 15.536a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-        </button>
-        <button onclick="showConfirmModal()" title="Restart" class="p-2 sm:p-2.5 bg-red-600 hover:bg-red-500 rounded shadow-md transition text-white flex items-center justify-center">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
-        </button>
-    </div>
-
     <div class="game-board max-w-2xl mx-auto w-full pt-16 sm:pt-20 z-10 relative">
-        <div class="grid grid-cols-7 gap-1 sm:gap-2 w-full shrink-0 items-start">
-            <div class="card-container cursor-pointer hover:brightness-110 transition" id="stock-container" onclick="handleStockClick()"></div>
-            <div class="card-container drop-target ml-2 sm:ml-4" data-drop-type="waste" id="waste-container"></div>
-            <div class="pointer-events-none"></div>
-            <div class="card-container drop-target" data-drop-type="foundation" data-drop-index="0" id="foundation-0"></div>
-            <div class="card-container drop-target" data-drop-type="foundation" data-drop-index="1" id="foundation-1"></div>
-            <div class="card-container drop-target" data-drop-type="foundation" data-drop-index="2" id="foundation-2"></div>
-            <div class="card-container drop-target" data-drop-type="foundation" data-drop-index="3" id="foundation-3"></div>
+        <div class="grid grid-cols-7 gap-1 sm:gap-2 w-full mb-4 px-1 sm:px-0">
+            <!-- Stock & Waste -->
+            <div class="col-span-1 drop-target cursor-pointer" data-drop-type="stock" onclick="handleStockClick()">
+                <div class="card-container" id="stock-container"></div>
+            </div>
+            <div class="col-span-1 drop-target relative left-3 sm:left-6" data-drop-type="waste">
+                <div class="card-container" id="waste-container"></div>
+            </div>
+            
+            <div class="col-span-1"></div>
+            
+            <!-- Foundations -->
+            <div class="col-span-1 drop-target" data-drop-type="foundation" data-drop-index="0">
+                <div class="card-container" id="foundation-0"></div>
+            </div>
+            <div class="col-span-1 drop-target" data-drop-type="foundation" data-drop-index="1">
+                <div class="card-container" id="foundation-1"></div>
+            </div>
+            <div class="col-span-1 drop-target" data-drop-type="foundation" data-drop-index="2">
+                <div class="card-container" id="foundation-2"></div>
+            </div>
+            <div class="col-span-1 drop-target" data-drop-type="foundation" data-drop-index="3">
+                <div class="card-container" id="foundation-3"></div>
+            </div>
         </div>
 
-        <div class="grid grid-cols-7 gap-1 sm:gap-2 mt-2 w-full items-start h-full" id="tableau-container"></div>
+        <div class="grid grid-cols-7 gap-1 sm:gap-2 mt-2 w-full items-start h-full px-1 sm:px-0" id="tableau-container"></div>
     </div>
 
-    <!-- クリア時のテキスト -->
     <div id="clear-text-container" class="fixed inset-0 pointer-events-none flex items-center justify-center z-[45] hidden opacity-0 transition-opacity duration-1000">
         <h2 class="text-5xl sm:text-7xl md:text-8xl title-font font-bold text-yellow-400 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] transform scale-50 translate-y-10 transition-all duration-1000 ease-out text-center px-4">
             Congratulations!
@@ -260,9 +284,10 @@
         </div>
     </div>
 
+    <!-- Help & Story Modal -->
     <div id="help-modal" class="modal fixed inset-0 hidden items-center justify-center z-[60]">
-        <div class="bg-[#1a1a1a] border border-gray-700 p-6 rounded-lg shadow-2xl text-left max-w-xs sm:max-w-md w-full mx-4 flex flex-col">
-            <!-- Tabs (固定ヘッダー) -->
+        <div class="bg-[#1a1a1a] border border-gray-700 p-6 rounded-lg shadow-2xl text-left max-w-sm sm:max-w-xl w-full mx-4 flex flex-col">
+            <!-- Tabs -->
             <div class="flex border-b border-gray-700 mb-4 shrink-0">
                 <button onclick="switchLanguage('en')" id="tab-en" class="flex-1 py-2 text-center text-sm font-semibold border-b-2 border-yellow-500 text-yellow-400 transition-colors">English</button>
                 <button onclick="switchLanguage('ja')" id="tab-ja" class="flex-1 py-2 text-center text-sm font-semibold border-b-2 border-transparent text-gray-400 hover:text-gray-200 transition-colors">日本語</button>
@@ -270,71 +295,323 @@
             </div>
 
             <!-- スクロール領域 -->
-            <div class="relative overflow-y-auto custom-scrollbar pr-3 h-[240px] sm:h-[280px]">
-                <!-- English -->
+            <div class="relative overflow-y-auto custom-scrollbar pr-3 h-[300px] sm:h-[480px]">
+                
+                <!-- =============== English =============== -->
                 <div id="content-en" class="block space-y-2 pb-2">
                     <h2 class="text-xl sm:text-2xl title-font font-bold mb-3 text-white">How to Play</h2>
                     <div class="text-sm sm:text-base text-gray-300 space-y-2">
                         <p>The basic rules are the same as standard Klondike Solitaire. The game progresses in 3 phases:</p>
-                        <ol class="list-decimal pl-5 space-y-1 text-gray-200">
+                        <ol class="list-decimal pl-5 space-y-1 text-gray-200 font-semibold">
                             <li><strong class="text-yellow-400">Draw 3:</strong> Draw 3 cards at a time.</li>
                             <li><strong class="text-yellow-400">Draw 2:</strong> Once the stock is empty, it recycles, and you draw 2 cards.</li>
                             <li><strong class="text-yellow-400">Draw 1:</strong> Recycles again, drawing 1 card at a time.</li>
                         </ol>
                         <p class="text-red-400 font-semibold mt-3">If you empty the stock in the 'Draw 1' phase, the game is over!</p>
                     </div>
-                    <!-- 少しスクロールしないと見えない位置に配置 -->
-                    <div class="mt-12 pt-6 border-t border-gray-700/80">
-                        <h3 class="text-lg font-bold text-white mb-2 title-font">About "Father's Edition"</h3>
-                        <p class="text-sm text-gray-400 italic">When I was a child, I thought this was the official rule. Recently, I found my late father's old playing card rulebook. He had crossed out the original "always draw 3" rule and hand-written "then 2, then 1" next to it. I don't know if it was truly his original rule, but he must have been very confident in this way of playing to go out of his way to rewrite it. He played this game every single day until the cards wore out—and then he would buy a new deck—saying it was a great mental exercise to keep his mind sharp. For me, this rule is a cherished memory of my late father. I hope you enjoy playing it too.</p>
+
+                    <div class="mt-8 pt-5 border-t border-gray-700/80">
+                        <h3 class="text-lg font-bold text-white mb-4 title-font">About "Father's Edition"</h3>
+                        <p class="text-sm text-gray-300 mb-4">I learned this special rule from my late father and grew up believing it was the official way to play. Even after discovering the standard rules, they never quite felt right—this version will always be my "official" Solitaire. That's why I decided to create this game. I hope you enjoy it!</p>
+                        
+                        <div class="space-y-3">
+                            <!-- Chapter 1 -->
+                            <details class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>Midnight Lights and an Unopened Deck</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>This "3-2-1" rule was our "house rule," played daily by my late father.</p>
+                                    <p>When I was a child, I would sometimes wake up in the middle of the night to go to the bathroom and see a faint light leaking from the crack of my father's door. Peeking in, I would see him quietly playing Solitaire all by himself. His profile as he silently moved the cards still remains mysteriously etched in my mind.</p>
+                                    <p>He played until the cards were worn out, immediately replacing them with a new deck when they got damaged. Because of this, we always had a spare, unopened deck of cards at home.</p>
+                                    <p>Some time after he passed away, while sorting through his belongings, I found a brand-new deck of cards still wrapped in plastic, just like back then. The moment I picked up that box, the midnight lights and the crisp sound of him flicking the cards vividly returned to me.</p>
+                                    <p>While I was immersed in these memories, my mother found the deck and immediately tried to open it, saying, "Perfect, now we don't have to buy a new one." She, too, played by this exact same rule whenever she had free time. But the cards she was using back then were so worn out they had to be reinforced with tape.</p>
+                                    <p>But for some reason, I didn't want her to open that brand-new deck, and I frantically stopped her. I couldn't explain why, but I just wanted to leave that plastic-wrapped box exactly as it was. Calming her down and rushing to a 100-yen shop to buy another deck is now a fond memory.</p>
+                                </div>
+                            </details>
+
+                            <!-- Chapter 2 -->
+                            <details id="en-chap2-content" class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors hidden">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>Proving the Unnoticed "Heresy"</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>It took me a considerable amount of time to realize that this "3-2-1" rule was not "normal."</p>
+                                    <p>When I first saw Solitaire on Windows, I played it with a sense of nostalgia, thinking it was the game I used to play as a child. However, seeing that it kept drawing "3 cards, 3 cards" no matter how many times I flipped, I thought: "Huh? I guess there are strange local rules like this in the world."</p>
+                                    <p>At the time, it didn't even cross my mind that my way was the "different" one. To me, "3-2-1" was the absolute official rule, and I naturally assumed that Windows had adopted some obscure special variant.</p>
+                                    <p>Windows Solitaire didn't evoke much emotion beyond nostalgia, and since there were plenty of other games, I didn't pursue it deeply and just played casually.</p>
+                                    <p>However, later on, whenever I touched browser versions or app collections of card games, I slowly began to feel that "drawing 3" was the mainstream in the world. Around that time, I finally arrived at a hypothesis: "...Could it be that my way was the local rule?" Still, my trust in this rule didn't waver. If a proper company released a game, they would surely follow the official rules. But this, I believed, was a "major local rule that everyone plays, even if it's not official."</p>
+                                    <p>Time passed, and it was only recently that I started investigating it seriously. After creating a few games using the trending "vibe coding," I remembered this Solitaire rule when thinking about what to make next. Since it's a major local rule, someone might have already made it. I didn't want to just create a carbon copy, so I started searching for existing examples.</p>
+                                    <p>To my surprise, whether I asked ChatGPT or other generative AIs, they all dismissed it, saying, "Such a rule does not exist." I scoured various Klondike strategy sites, but the local rules that came up were things like "unlimited recycling of the stock" or "placing cards other than Kings in empty columns." I couldn't find a highly game-like rule such as "3-2-1" anywhere.</p>
+                                    <p>However, while the AIs stated the rule itself didn't exist, they unanimously praised it: "That is a very interesting and logical rule." Those words gave me a strong push. No one is doing it, but it's a good rule. That makes it all the more worth creating—I gained confidence.</p>
+                                    <p>"...But what on earth was that rule?" I was struck by an inexplicable feeling, but at the same time, the conviction that "no one else is making this" turned into a solid confidence. In that case, there is a meaning in me making it. Without hesitation, I typed in the prompt: "Gemini, create a Solitaire game where the hand changes from 3 cards, to 2 cards, to 1 card." This was the beginning of this project.</p>
+                                </div>
+                            </details>
+
+                            <!-- Chapter 3 -->
+                            <details id="en-chap3-content" class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors hidden">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>Father's Handwriting, A Stamp of Pride</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>"Do this here, do that there." As I gave detailed instructions to the AI while recalling the physical feeling of playing the game, my father's image gradually began to cross my mind. The rhythm left in my fingertips, the sensation of flipping the cards. The more I put them into words, the more a vague thought surfaced: maybe this rule was something my father came up with himself.</p>
+                                    <p>Therefore, I decided to give this game the subtitle "Father's Edition."</p>
+                                    <p>While talking to Gemini about my father, recounting various anecdotes, I suddenly remembered. There should be an old playing card rulebook back at my parents' house.</p>
+                                    <p>I had given it the grand title "Father's Edition," but what if this rule was actually written in that book as a matter of course? Looking back, I remembered playing competitive games like Poker, Speed, Sevens, and Old Maid with friends, but I had no memory of ever discussing Solitaire. Perhaps "3-2-1" used to be official, but since single-player games weren't as popular as competitive ones, it simply got replaced and cemented as "fixed 3 cards" with the advent of Windows. Maybe the old book would list this as the correct rule. With such faint hopes, I dug out the old book. Even at this stage, I still believed that "3-2-1" was the official rule.</p>
+                                    <p>However, the first thing that jumped to my eyes when I opened the book was a casual cross-out mark, and my father's handwriting next to it saying, "Then 2 cards, then 1 card."</p>
+                                    <p>Thinking it couldn't be, I read on, and sure enough. The book's explanation read, "If you still cannot finish after playing all the cards from your hand, turn the waste pile back into the stock and draw 3 cards at a time again." My father had forcefully crossed out the "again 3 cards" part and added his own correct answer.</p>
+                                    <p>I flipped through the pages wondering if there were any other corrected pages, but no matter how much I searched, the Klondike page was the only one my father had taken a pen to.</p>
+                                    <p>When I reached the very last page, I found his signature.<br>
+                                    "1978.1.13. Friday,"<br>
+                                    "Tanaka-machi, Toyama City **"<br>
+                                    "Makoto Ono"</p>
+                                    <p>The date and address carefully written in my father's handwriting, along with his signature. For the second stroke of the character "大" (O), after writing it once, perhaps he didn't like it, he extended it smoothly for about two lines over the original stroke. Matching this, the sweeping strokes of "野" (no) and "誠" (Makoto) were also slightly elongated, and the word "Friday" was written in flowing cursive.</p>
+                                    <p>That meticulousness and slight "showiness" was exactly the father I knew.</p>
+                                    <p>As I looked at that handwriting, a thought occurred to me. Perhaps my father correcting the book was a kind of pride. "My rule is more fun." He must have had that conviction.</p>
+                                    <p>Come to think of it, I am now turning this rule that cannot be found anywhere into a game and broadcasting it to the world. "Look, isn't this rule fun?" The only difference is whether he wrote it in a book or I released it on the internet; I might be doing the exact same thing as my father.</p>
+                                </div>
+                            </details>
+
+                            <!-- Chapter 4 -->
+                            <details id="en-chap4-content" class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors hidden">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>The Legacy of "3-2-1"</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>In the end, the origin of this rule remains unknown. Perhaps it was passed down from an even older generation, from my grandfather.</p>
+                                    <p>My grandfather once played cards with American soldiers during the war, and he taught our family the Rummy he learned then. I vaguely remember him bragging, "I was strong back then."</p>
+                                    <p>However, I cannot say for sure whether this rule was passed from my grandfather to my father. By the time I was old enough to understand, they were already estranged, and I couldn't even imagine them happily playing cards together.</p>
+                                    <p>My father was deaf, but my grandfather could not use sign language at all. This is just my imagination, but perhaps my grandfather forcing my father to lip-read and speak was his own clumsy parental love, hoping his deaf son wouldn't struggle in society when he grew up. He must have been desperately worried about my father's future. That's how I think of it now.</p>
+                                    <p>But from my father's perspective at the time, my grandfather might have seemed like "someone who wouldn't learn sign language for me." Such misunderstandings must have created a deep rift between them. My sister and I naturally grew attached to our grandparents, who could hear our voices, but that, too, might have been complicated for my father.</p>
+                                    <p>My father playing Solitaire alone late into the night might have been a quiet habit and a means of escape he found while living with a strict grandfather with whom he couldn't share a common language.</p>
+                                    <p>Did he learn it from someone, or did he come up with it himself? A rule that starts with "draw 3" (difficult), steps down to "draw 2," and ends with "draw 1" (easy).</p>
+                                    <p>The wall of "luck" when drawing 3 is finally overcome by giving every card a chance when drawing 1. Easier than drawing 3, but more challenging than drawing 1. This exquisite balance feels very much like an invention of my father, who loved games.</p>
+                                    <p>This light, which might have stopped passing from father to son, has now been reignited in the new form of a program. Even if it exists in no official records, this rule was certainly breathing on the other side of our family's playing cards.</p>
+                                    <p>This game is filled with such family memories and the small pride of a man who believed, "This is right." I sincerely hope you all enjoy this rule that my father loved so much.</p>
+                                </div>
+                            </details>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Japanese -->
+                <!-- =============== Japanese =============== -->
                 <div id="content-ja" class="hidden space-y-2 pb-2">
                     <h2 class="text-xl sm:text-2xl title-font font-bold mb-3 text-white">遊び方</h2>
                     <div class="text-sm sm:text-base text-gray-300 space-y-2">
-                        <p>基本ルールは通常のクロンダイク・ソリティアと同じです。ゲームは3つのフェーズで進行します：</p>
-                        <ol class="list-decimal pl-5 space-y-1 text-gray-200">
+                        <p>基本ルールは通常のクロンダイク・ソリティアと同じです。ゲームは以下のフェーズで進行します：</p>
+                        <ol class="list-decimal pl-5 space-y-1 text-gray-200 font-semibold">
                             <li><strong class="text-yellow-400">3枚めくり:</strong> 山札から3枚ずつカードを引きます。</li>
                             <li><strong class="text-yellow-400">2枚めくり:</strong> 山札が尽きると復活し、2枚ずつ引くようになります。</li>
                             <li><strong class="text-yellow-400">1枚めくり:</strong> 再度山札が復活し、1枚ずつ引くようになります。</li>
                         </ol>
                         <p class="text-red-400 font-semibold mt-3">「1枚めくり」のフェーズで山札が尽きるとゲームオーバーです！</p>
                     </div>
-                    <div class="mt-12 pt-6 border-t border-gray-700/80">
-                        <h3 class="text-lg font-bold text-white mb-2 title-font">"Father's Edition" について</h3>
-                        <p class="text-sm text-gray-400 italic">子供の頃、私はこれが公式のルールだと思っていました。先日、亡き父が持っていたトランプ本を見つけました。そこには元の「常に3枚めくる」というルールに打ち消し線が引かれ、手書きで「次は2枚、次は1枚」と書き直されていました。本当に父のオリジナルルールだったのかはわかりませんが、わざわざ書き直すくらいですから、よっぽどこの遊び方に自信があったのかもしれません。父は「ボケ防止の頭の体操になるから」と言って、トランプが擦り切れるまで、そして擦り切れたら新しいものを買ってまで、毎日このルールで遊んでいました。私にとって、このルールは亡き父との大切な思い出の一つです。皆さんにもこのルールを楽しんでいただけたら嬉しいです。</p>
+
+                    <div class="mt-8 pt-5 border-t border-gray-700/80">
+                        <h3 class="text-lg font-bold text-white mb-4 title-font">"Father's Edition" について</h3>
+                        <p class="text-sm text-gray-300 mb-4">亡き父から教わったこのルールを、私は子供の頃ずっと「公式ルール」だと思って育ちました。普通のルールを知った今でも、私の中での「公式」はこの遊び方であり、標準のルールではどうもしっくりこなかったため、自分でこのゲームを作ることにしました。楽しんでいただけたら嬉しいです。</p>
+                        
+                        <div class="space-y-3">
+                            <!-- 第1章 -->
+                            <details class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>真夜中の明かりと、未開封のトランプ</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>この「3-2-1」というルールは、私の亡き父が毎日遊んでいた、わが家の“ハウスルール”です。</p>
+                                    <p>子供の頃、夜中にふと目を覚ましてトイレに立つと、父の部屋のドアの隙間から、うっすらと明かりが漏れていることがありました。そっと覗くと、父が一人、静かにソリティアに興じている。黙々とカードを動かすその横顔は、今でも不思議と心に残っています。</p>
+                                    <p>父はトランプがボロボロになるまで遊び、傷むとすぐに新しいデッキに替えるので、家にはいつも予備の、未開封のトランプがありました。</p>
+                                    <p>父が亡くなってしばらく経ち、遺品を整理していた時のことです。あの頃と同じ、ビニールに包まれたままの新品のトランプを見つけました。その箱を手に取った瞬間、深夜の明かりと、父がカードを弾くパチパチという音があざやかに蘇りました。</p>
+                                    <p>そんな感慨に浸る私をよそに、母はそのデッキを見つけるなり「ちょうど良かった、新しいのを買わずに済む」と、すぐに開けようとしました。母もまた、暇があれば父と同じこのルールで遊んでいた一人でしたが、当時、母が使っていたトランプも、破れたところをテープで補強するほどボロボロだったのです。</p>
+                                    <p>でも私は、なぜかその新品を開けてほしくなくて、慌てて母を止めました。理由をうまく説明することはできませんでしたが、あのビニールに包まれたままの箱を、そのまま残しておきたかったのです。結局、母をなだめて100円ショップへ別のトランプを買いに走ったことも、今となっては良い思い出です。</p>
+                                </div>
+                            </details>
+
+                            <!-- 第2章 -->
+                            <details id="ja-chap2-content" class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors hidden">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>気づかなかった「異端」の証明</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>私がこの「3-2-1」というルールが「普通ではない」と気づくのには、かなりの時間を要しました。</p>
+                                    <p>Windowsで初めてソリティアを見た時、子供の頃によく遊んだあのゲームか、と懐かしい気持ちで遊んでみました。しかし、何度めくっても「3枚、3枚」とずっと同じ枚数が続くのを見て、私はこう思いました。「あれ？ 世の中にはこういう変なローカルルールもあるんだな」</p>
+                                    <p>自分のほうが「違う」なんて、その時はつゆほどにも思っていなかったのです。自分の中では「3-2-1」こそが絶対的な公式ルールであり、Windowsのほうがどこかの特殊なルールを採用しているのだと、ごく自然に受け止めていました。</p>
+                                    <p>Windows版のソリティアにも懐かしい以上の感情は湧かず、他にもゲームはいくらでもあったので、当時は深く追求することもなく、そのまま遊び流していました。</p>
+                                    <p>しかしその後、ブラウザ版やトランプゲームの詰め合わせのようなアプリを触るたびに、世間では「3枚めくり」が主流なのだとじわじわと感じ始めました。その頃になってようやく、私は一つの仮説に辿り着きます。「……もしかして、俺のほうがローカルルールだったのか？」</p>
+                                    <p>それでも、自分の中ではこのルールへの信頼は揺らぎませんでした。ちゃんとした企業が出しているゲームなら、そりゃあ公式ルールに則って出すだろう。けれど、これは「公式ではないけれど、みんながやっているメジャーなローカルルール」なのだ。そう信じていたのです。</p>
+                                    <p>そうして時が経ち、本格的に調べ始めたのは、最近のことです。流行りの「バイブコーディング」で何個かゲームを作ったあと、さて次は何作ろうかと思った時に思い出したのが、このルールのソリティアでした。メジャーなローカルルールだから、すでに個人で作っている人がいるかもしれない。二番煎じだったら作るのをやめよう。そう思って、先行事例を探すために調べ始めました。</p>
+                                    <p>ところが、ChatGPTに聞いても、他の生成AIに尋ねても、「そんなルールは存在しない」と一蹴される始末。色々なクロンダイクの解説サイトを巡ってみましたが、出てくるローカルルールといえば「山札の再利用が無制限」であったり、「空列にキング以外も置ける」といった類のものばかり。「3-2-1」なんて、いかにもゲーム的なルールはどこにも見当たりませんでした。</p>
+                                    <p>しかし、AIたちはルールそのものは存在しないと言いつつも、「それは非常に面白い、理にかなったルールですね」と口を揃えて褒めてくれた。その言葉が、私の背中を強く押しました。誰もやっていない、けれど良いルールなのだ。それなら余計に作る価値があるじゃないか、と自信を持つことができたのです。</p>
+                                    <p>「……でも、あのルールはいったい何だったんだ？」得体の知れない感覚に襲われましたが、同時に「これを作っている人は他にいない」という確信が、一つの確かな自信へと変わりました。それなら、自分が作る意味がある。私は迷わずプロンプトを打ち込みました。「Gemini、手札が３枚、２枚、１枚と変わっていくソリティアを作って」</p>
+                                    <p>これが、このプロジェクトの始まりでした。</p>
+                                </div>
+                            </details>
+
+                            <!-- 第3章 -->
+                            <details id="ja-chap3-content" class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors hidden">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>父の筆跡、プライドの訂正印</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>「ここはこうして、あそこはああして」 実物でのプレイ感覚を思い出しながら、AIに細かな指示を出していると、次第に父の姿が脳裏をよぎり始めました。指先に残るリズム、カードをめくる感覚.。それらを言葉にしていくほどに、もしかしたらこのルールは、父が自分自身で考え出したものだったのかもしれない、という思いが漠然と湧き上がってきたのです。</p>
+                                    <p>そこで私は、このゲームに『Father's Edition』というサブタイトルを冠することにしました。</p>
+                                    <p>Geminiに父のことを語り、あんなことがあった、こんなことがあったと話しているうちに、ふと思い出したのです。たしか実家には、古いトランプのルール本があったはずだ、と。</p>
+                                    <p>『Father's Edition』なんて大層な名前を付けてしまったけれど、もしかしたらあの本には、当たり前のようにこのルールが載っているのではないか。思い返せば、ポーカーやスピード、７並べ、ババ抜きなどの対戦ゲームは友人と遊んだ記憶があるが、ソリティアについて話をした覚えがない。かつて「3-2-1」こそが公式だったけど、対戦ゲームなどに比べ、一人用はそこまで流行らず、Windowsの登場によって「3枚固定」に取って代わられて定着してしまっただけなのではないか。古い本にはこちらが正解として載っているかもしれない。そんな淡い期待を抱いて、私は古い本を引っ張り出してきました。 この期に及んでもなお、私は「3-2-1」が、公式であると信じていたのです。</p>
+                                    <p>ところが、本を開いて最初に目に飛び込んできたのは、無造作なバッテン印と、その横に書かれた「次は２枚，次一枚．」という父の筆跡でした。</p>
+                                    <p>まさかと思って読んでみると、案の定。 本の解説には『手札を全部出してもでき上がらなかったら、もう一度捨札を手札にして、また３枚ずつめくっていきます。』とあり、父はその”また３枚”という箇所を力強く打ち消し、自分なりの正解を書き足していたのです。</p>
+                                    <p>他にもどこか修正しているページがあるのではないかと、私はパラパラとページをめくってみましたが、どれだけ探しても、父がペンを入れたのはクロンダイクのページだけでした。</p>
+                                    <p>そのまま最後のページまで辿り着いたとき、私はその署名を見つけました。<br>
+                                    「1978.1.13. Friday,」<br>
+                                    「富山市田中町※※」<br>
+                                    「大野誠」 </p>
+                                    <p>父の字で丁寧に記された日付と住所、そして署名。「大」という字の二画目の払いを、一度書いたあと、気に入らなかったのか上から二行分ほど長くスッと伸ばした筆跡。それに合わせるように「野」と「誠」の払いも少し長くなっていて、しかも「Friday」の文字は、流れるような筆記体で書かれている。</p>
+                                    <p>その几帳面さと、ちょっとした“かっこつけ”は、まさに私の知る父そのものでした。</p>
+                                    <p>その筆跡を見ているうちに、ふと思ったのです。 父が本を訂正したのは、一種のプライドだったのではないか。 「俺のルールのほうが面白い」 そんな確信があったのではないか。</p>
+                                    <p>思えば、私も今、どこにも見つからないこのルールをゲームにして、世界に発信しようとしています。「どうだ、このルールは面白いだろう」と。それを本に書き込んだのか、ネットに放流したのかの違いだけで、私は父と全く同じことをしているのかもしれません。</p>
+                                </div>
+                            </details>
+
+                            <!-- 第4章 -->
+                            <details id="ja-chap4-content" class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors hidden">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>受け継がれる「3-2-1」の灯</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>このルールの起源は、結局のところ分かりません。もしかしたら、さらに上の世代、祖父から伝わったものだったのでしょうか。</p>
+                                    <p>祖父は戦時中、アメリカ兵とトランプ勝負をしたことがあり、その時に覚えたラミーを家族に教えてくれたことがあります。「そのときは強かった」と自慢げに話していたのを、私は朧げながら覚えています。</p>
+                                    <p>しかし、このルールが祖父から父へ伝わったものなのかどうか、実のところ私は断言できません。私が物心ついた頃には、二人はすでに仲違いしていて、仲良くトランプをしていた姿なんて想像もできないからです。</p>
+                                    <p>父は聾者でしたが、祖父は手話を一切使えませんでした。これは私の想像でしかありませんが、祖父が父に口話を強いたのは、耳が聞こえない息子が大人になってから社会で苦労しないようにという、彼なりの不器用な親心だったのかもしれません。父の将来を案じる必死さがあったのではないか。今になって、私はそんな風に思うのです。</p>
+                                    <p>けれど当時の父から見れば、それは「自分のために手話を覚えてくれない人」に映ったのかもしれません。そんなすれ違いが、二人の間に深い溝を生んでしまったのでしょう。私や姉は、声が通じる祖父母に自然と懐きましたが、それもまた、父にとっては複雑だったのかもしれません。</p>
+                                    <p>父が夜遅くまで一人でソリティアに興じていたのは、言葉の通じない厳格な祖父との生活の中で見つけた、静かな習慣であり、逃避行だったのかもしれません。</p>
+                                    <p>そんな父が、誰かから教わったのか、あるいは自分で考え出したのか。「3枚ずつ（難しい）」から始まり、次に「2枚ずつ」、最後は「1枚ずつ（簡単）」へと段階を踏んでいくこのルール。</p>
+                                    <p>3枚ずつでは絶対に動かせないカードが出てくる「運」の壁を、最後は1枚ずつめくることで、すべてのカードにチャンスを与える。3枚めくりよりは易しく、1枚めくりよりは歯応えがある。この絶妙な塩梅は、いかにもゲームを愛した父らしい発明のように思えるのです。</p>
+                                    <p>父から子へ、そこで止んでいたかもしれないこの灯は、今、プログラムという新しい形を得て再び灯されました。たとえ公式な記録にはなくても、わが家のトランプの裏側には、確かにこのルールが息づいていました。</p>
+                                    <p>このゲームには、そんな家族の記憶と、一人の男が「これが正しい」と信じた小さな誇りが詰まっています。父が愛したこのルールを、皆さんも楽しんでいただければ幸いです。</p>
+                                </div>
+                            </details>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Traditional Chinese -->
+                <!-- =============== Traditional Chinese =============== -->
                 <div id="content-zh-TW" class="hidden space-y-2 pb-2">
                     <h2 class="text-xl sm:text-2xl title-font font-bold mb-3 text-white">遊戲玩法</h2>
                     <div class="text-sm sm:text-base text-gray-300 space-y-2">
                         <p>基本規則與標準的克朗代克紙牌（Klondike Solitaire）相同。遊戲分為三個階段進行：</p>
-                        <ol class="list-decimal pl-5 space-y-1 text-gray-200">
+                        <ol class="list-decimal pl-5 space-y-1 text-gray-200 font-semibold">
                             <li><strong class="text-yellow-400">抽3張：</strong>每次從牌庫抽出3張牌。</li>
                             <li><strong class="text-yellow-400">抽2張：</strong>牌庫抽空後會重新洗牌，改為每次抽2張。</li>
                             <li><strong class="text-yellow-400">抽1張：</strong>牌庫再次抽空後，改為每次抽1張。</li>
                         </ol>
                         <p class="text-red-400 font-semibold mt-3">如果在「抽1張」階段牌庫被抽空，遊戲即告結束！</p>
                     </div>
-                    <div class="mt-12 pt-6 border-t border-gray-700/80">
-                        <h3 class="text-lg font-bold text-white mb-2 title-font">關於 "Father's Edition"</h3>
-                        <p class="text-sm text-gray-400 italic">小時候，我以為這就是官方規則。最近我找到了已故父親以前用的撲克牌規則書。他把原本「總是抽3張」的規則劃掉，並在旁邊親手寫上「接下來抽2張，然後抽1張」。我不知道這是否真的是他的原創規則，但他特地將其改寫，想必對這種玩法非常有自信。他說這能「預防失智、鍛鍊腦力」，每天都用這個規則玩，直到撲克牌磨損，然後再買一副新的繼續玩。對我來說，這個規則是我與已故父親之間珍貴的回憶之一。希望大家也能喜歡這個玩法並從中獲得樂趣。</p>
+
+                    <div class="mt-8 pt-5 border-t border-gray-700/80">
+                        <h3 class="text-lg font-bold text-white mb-4 title-font">關於 "Father's Edition"</h3>
+                        <p class="text-sm text-gray-300 mb-4">我從小就跟著已故的父親學習這個特別的規則，並一直以為這就是官方玩法。即使後來知道了標準規則，我總覺得玩起來不太對味——對我來說，這才是「官方」的接龍。因此，我決定自己製作這款遊戲。希望你能喜歡！</p>
+                        
+                        <div class="space-y-3">
+                            <!-- Chapter 1 -->
+                            <details class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>深夜的燈光與未拆封的撲克牌</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>這個「3-2-1」的規則，是我已故父親每天玩的「家規」。</p>
+                                    <p>小時候，半夜醒來去洗手間時，偶爾會看到父親房門縫裡透出微弱的燈光。悄悄偷看，會發現他獨自一人靜靜地玩著接龍。他默默移動卡片的側臉，至今依然不可思議地留在我的腦海中。</p>
+                                    <p>他總是把撲克牌玩到破爛不堪，一旦損壞就立刻換一副新的。因此，家裡總是有備用的、未拆封的撲克牌。</p>
+                                    <p>父親過世一段時間後，在整理遺物時，我找到了一副和當年一樣、仍包著塑膠膜的全新撲克牌。拿起那個盒子的瞬間，深夜的燈光和父親彈撲克牌的清脆聲音，鮮明地浮現在我眼前。</p>
+                                    <p>正當我沉浸在感概中時，母親一發現那副牌，便說：「太好了，這樣就不用買新的了」，並立刻準備拆開。母親也是一有空就會用這同一個規則玩接龍的人。但當時，母親使用的撲克牌也破爛到需要用膠帶修補。</p>
+                                    <p>但是，我不知為何就是不想讓她拆開那副新牌，於是慌忙阻止了她。我無法清楚解釋原因，但就是想把那個包著塑膠膜的盒子原封不動地保留下來。最後安撫了母親，跑去百元商店買了另一副撲克牌，如今這也成了一段美好的回憶。</p>
+                                </div>
+                            </details>
+
+                            <!-- Chapter 2 -->
+                            <details id="zh-TW-chap2-content" class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors hidden">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>未曾察覺的「異端」證明</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>我花了相當長的時間才意識到，這個「3-2-1」的規則其實「並不普通」。</p>
+                                    <p>當我第一次在 Windows 上看到接龍時，帶著懷念的心情玩了一下，以為這是我小時候常玩的那個遊戲。然而，看到不管翻幾次都是「抽3張、抽3張」的固定數量，我心想：「咦？原來世界上還有這種奇怪的在地規則啊。」</p>
+                                    <p>那時我絲毫沒有想過，原來「不同」的其實是我自己。在我的認知裡，「3-2-1」才是絕對的官方規則，我很自然地認為 Windows 採用了某種特殊玩法。</p>
+                                    <p>Windows 版的接龍並沒有引起我懷念之外的太多情感，加上當時還有很多其他遊戲，我也沒有深入探究，就這樣隨便玩玩過去了。</p>
+                                    <p>然而之後，每當我接觸到網頁版或撲克牌遊戲合集之類的應用程式時，我開始漸漸感覺到「抽3張」才是世上的主流。直到那時，我才終於得出一個假設：「……難道，我玩的才是所謂的在地規則？」</p>
+                                    <p>儘管如此，我對這個規則的信任依然沒有動搖。大公司出的遊戲，理當會遵循官方規則。但這個規則，我深信它是「雖然不是官方的，但大家都在玩的主流在地規則」。</p>
+                                    <p>就這樣過了一段時間，直到最近我才開始認真調查這件事。在用最近流行的「vibe coding」做了幾個遊戲後，正想著接下來要做什麼時，我想起了這個規則的接龍。既然是主流的在地規則，或許早就有人自己做出來了。為了避免步人後塵，我開始尋找先例。</p>
+                                    <p>然而，無論是問 ChatGPT，還是問其他生成式 AI，都被一句「不存在這種規則」給打回票。我巡視了各種克朗代克的解說網站，出現的在地規則盡是些「無限次重新洗牌」或「空格可以放國王以外的牌」之類的。「3-2-1」這種極具遊戲性的規則，到處都找不到。</p>
+                                    <p>不過，儘管 AI 們說這個規則本身不存在，卻異口同聲地稱讚說：「這是一個非常有趣且合理的規則。」那句話給了我很大的動力。沒有別人在做，卻是個好規則。那不就更有製作的價值了嗎？這讓我產生了自信。</p>
+                                    <p>「……但是，那個規則到底是什麼啊？」雖然被一種難以名狀的感覺襲擊，但同時「沒有別人在做這個」的認知，也化為了一種確切的自信。既然如此，就有我來製作的意義了。我毫不猶豫地輸入了提示詞：「Gemini，幫我做一個手牌會從抽3張、抽2張變成抽1張的接龍遊戲。」這就是這個專案的起點。</p>
+                                </div>
+                            </details>
+
+                            <!-- Chapter 3 -->
+                            <details id="zh-TW-chap3-content" class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors hidden">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>父親的筆跡，驕傲的更正印記</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>「這裡這樣改，那裡那樣做。」當我一邊回憶實際遊玩的手感，一邊對 AI 下達詳細指示時，父親的身影逐漸在腦海中浮現。指尖殘留的節奏、翻牌的觸感。越是用言語表達出來，一個模糊的想法就越是湧上心頭：或許這個規則，是父親自己想出來的。</p>
+                                    <p>因此，我決定為這款遊戲冠上『Father's Edition』的副標題。</p>
+                                    <p>在和 Gemini 談論父親，說著那些過去的點點滴滴時，我突然想起來了。老家應該有一本舊的撲克牌規則書。</p>
+                                    <p>雖然我誇下海口取了『Father's Edition』這樣響亮的名字，但說不定那本書裡理所當然地寫著這個規則？回想起來，我有和朋友玩撲克、心臟病、排七、抽鬼牌等對戰遊戲的記憶，卻不記得有討論過接龍。或許曾經「3-2-1」才是官方規則，但比起對戰遊戲，單人遊戲沒那麼流行，隨著 Windows 的出現，才被「固定抽3張」取而代之並定型下來的吧？說不定舊書裡會把這寫作正確答案。懷著這樣一絲微弱的期待，我翻出了那本舊書。事到如今，我依然相信「3-2-1」才是官方規則。</p>
+                                    <p>然而，翻開書本第一眼看到的，是一個隨手畫上的叉叉，以及旁邊用父親的筆跡寫著：「接下來抽2張，然後抽1張。」</p>
+                                    <p>心想著不會吧，繼續讀下去，果不其然。書上的解說寫著：『如果手牌出完還是無法破關，就把廢牌堆重新當作牌庫，再次每次抽3張。』父親用力劃掉了「再次抽3張」的部分，並補上了他自己心中的正確答案。</p>
+                                    <p>我心想說不定還有其他被修改的頁面，於是沙沙地翻著書頁，但不管怎麼找，父親動筆修改的就只有克朗代克這一頁。</p>
+                                    <p>就這樣翻到最後一頁時，我發現了他的簽名。<br>
+                                    「1978.1.13. Friday,」<br>
+                                    「富山市田中町※※」<br>
+                                    「大野誠」</p>
+                                    <p>用父親字跡工整寫下的日期、地址和簽名。「大」字的第二筆撇，寫了一次之後，也許是不滿意，又在上面拉長了大約兩行的長度。彷彿為了配合這個，『野』和『誠』的撇也稍微拉長了些，而且「Friday」這個字還是用流暢的草書寫成的。</p>
+                                    <p>那種一絲不苟又帶點「愛耍帥」的感覺，正是我所認識的父親。</p>
+                                    <p>看著那個字跡我突然想到：父親訂正那本書，或許是出於一種驕傲。「我發明的規則比較有趣。」他一定有這樣的確信。</p>
+                                    <p>回想起來，我現在也是把這個找不到的規則做成遊戲向全世界發表。「怎麼樣，這個規則很有趣吧？」差別只在於他是寫在書上，而我是發布到網路上而已，我現在做的事，或許和父親如出一轍。</p>
+                                </div>
+                            </details>
+
+                            <!-- Chapter 4 -->
+                            <details id="zh-TW-chap4-content" class="group bg-black/30 rounded-lg open:bg-black/50 transition-colors hidden">
+                                <summary class="cursor-pointer p-3 text-sm text-gray-500 hover:text-yellow-400 group-open:text-yellow-500 font-semibold select-none outline-none flex justify-between items-center transition-colors">
+                                    <span>傳承下去的「3-2-1」之光</span>
+                                    <span class="transform group-open:rotate-180 transition-transform">▼</span>
+                                </summary>
+                                <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
+                                    <p>這個規則的起源，終究是個謎。或許它是從更上一代，從我祖父那裡傳下來的？</p>
+                                    <p>祖父在戰爭期間曾和美國大兵打過撲克牌，並把那時學會的拉米（Rummy）教給了家人。我依稀記得他得意地吹噓著「那時候我可是很強的」。</p>
+                                    <p>然而，我無法斷言這個規則是否是由祖父傳給父親的。因為在我有記憶以來，他們倆的關係已經很不和睦，根本無法想像他們和樂融融地一起打牌的樣子。</p>
+                                    <p>父親是個失聰者，但祖父完全不會使用手語。這只是我的想像，或許祖父強迫父親讀唇語和說話，是出於他自己笨拙的父母心，希望聽不見的兒子長大後在社會上不要太吃苦。他一定非常為父親的未來感到擔憂。事到如今，我會這麼想。</p>
+                                    <p>但在當時的父親眼裡，祖父或許只是一個「不願意為了我學手語的人」。這樣的錯過，可能在他們之間產生了深深的代溝。我和姐姐自然而然地親近了能用聲音溝通的祖父母，但這對父親來說，或許也是一種複雜的心情吧。</p>
+                                    <p>父親深夜獨自玩著接龍，或許是在與無法用言語溝通的嚴厲祖父共同生活的日子裡，所找到的一種寧靜習慣，以及逃避現實的方式。</p>
+                                    <p>這樣的父親，是從某人那裡學來的，還是自己想出來的呢？每次抽3張時絕對無法移動的「運氣」之牆，在最後透過每次抽1張，給予了所有卡片機會。</p>
+                                    <p>比一直抽3張簡單，又比一直抽1張更具挑戰性。這種絕妙的平衡感，怎麼看都像是熱愛遊戲的父親的發明。</p>
+                                    <p>這盞或許原本會從父親到兒子就此熄滅的燈火，如今透過程式碼這種新形式再次被點亮了。即使沒有任何官方紀錄，但在我們家的撲克牌背後，確實鮮活地存在著這個規則。</p>
+                                    <p>這款遊戲裡，承載了這樣的家族記憶，以及一個男人堅信「這才是對的」的小小驕傲。衷心希望大家也能喜歡這個父親深愛的規則。</p>
+                                </div>
+                            </details>
+                        </div>
                     </div>
                 </div>
+
             </div>
             
-            <!-- Close button (固定フッター) -->
             <div class="flex justify-center mt-2 pt-4 border-t border-gray-700 shrink-0">
                 <button onclick="closeHelpModal()" class="w-full py-2.5 bg-gray-600 hover:bg-gray-500 rounded font-bold transition text-white shadow-lg">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- ギブアップ後のリトライボタン -->
+    <!-- Retry Button -->
     <div id="retry-container" class="fixed bottom-10 left-0 w-full flex justify-center z-50 transition-opacity duration-1000 opacity-0 pointer-events-none">
         <button onclick="initGame()" class="px-8 py-4 bg-yellow-600 hover:bg-yellow-500 rounded-full font-bold text-xl shadow-2xl transition transform hover:scale-105 border-2 border-yellow-300 text-white shadow-black/50">
             Play Again
@@ -358,6 +635,8 @@
         
         let isAnimating = false;
         let isGameOver = false;
+        let isGameCleared = false;
+        let isClearing = false;
         let currentDealId = 0;
 
         // --- 音声管理 ---
@@ -532,7 +811,6 @@
             }
         }
 
-        // --- 全カードを山札へ回収するアニメーション ---
         async function collectCardsToStock() {
             const cardsToCollect = [];
             
@@ -611,6 +889,7 @@
         async function initGame() {
             const dealId = ++currentDealId;
             isAnimating = true;
+            isClearing = false;
 
             document.body.classList.remove('phase-3');
             
@@ -635,6 +914,7 @@
             if (dealId !== currentDealId) return;
 
             isGameOver = false;
+            isGameCleared = false;
             
             drawCount = 3;
             foundations = [[], [], [], []];
@@ -803,11 +1083,9 @@
             const cardHeight = placeholder ? placeholder.getBoundingClientRect().height : 100;
             const offsets = getOffsets();
 
-            // 利用可能な描画高さを計算 (スクロールバーを出さないための制約)
             let availableHeightPx = tableauContainer.getBoundingClientRect().height - 10;
             if (availableHeightPx < cardHeight) availableHeightPx = cardHeight * 1.5;
 
-            // コンテナに収まる最大のオフセット(%)
             let maxTopPercent = Math.max(0, ((availableHeightPx - cardHeight) / cardHeight) * 100);
 
             let totalIdeal = 0;
@@ -826,26 +1104,22 @@
                 }
             }
             
-            // 最後のカードのみが表向きの場合
             if (col.length > 0 && col[col.length - 1].isFaceUp && firstFaceUpRow === -1) {
                 firstFaceUpRow = col.length - 1;
             }
 
-            // 列が長すぎて圧縮が必要か判定 (ゲームオーバー時は除外)
             const isCompressed = !isGameOver && (totalIdeal > maxTopPercent);
             colDiv.dataset.isCompressed = isCompressed;
 
-            // マウスホバーで注視されているカードのインデックス
             let focusedRow = colDiv.dataset.focusedRow !== undefined ? parseInt(colDiv.dataset.focusedRow) : firstFaceUpRow;
             
-            // フォーカス対象が無効な場合はデフォルトに戻す
             if (focusedRow < 0 || focusedRow >= col.length || !col[focusedRow].isFaceUp) {
                 focusedRow = firstFaceUpRow;
             }
 
             const gaps = [];
             if (isCompressed && upGaps > 0) {
-                const minUp = offsets.minUp;  // アコーディオン圧縮時の最小表示(%)
+                const minUp = offsets.minUp;  
                 const minDown = offsets.minDown;
                 
                 let actualDown = offsets.down;
@@ -853,9 +1127,8 @@
                 let actualOtherUp = offsets.up;
 
                 let excess = totalIdeal - maxTopPercent;
-                const otherUpGaps = upGaps > 0 ? upGaps - 1 : 0; // フォーカス行を除く表向きカードのギャップ数
+                const otherUpGaps = upGaps > 0 ? upGaps - 1 : 0; 
                 
-                // 1. フォーカスされていない表向きカードを縮める
                 if (excess > 0 && otherUpGaps > 0) {
                     const maxReducible = otherUpGaps * (offsets.up - minUp);
                     if (excess <= maxReducible) {
@@ -867,7 +1140,6 @@
                     }
                 }
 
-                // 2. 裏向きカードを縮める
                 if (excess > 0 && downGaps > 0) {
                     const maxReducible = downGaps * (offsets.down - minDown);
                     if (excess <= maxReducible) {
@@ -879,7 +1151,6 @@
                     }
                 }
 
-                // 3. それでも足りない場合はフォーカスしているカードも縮める
                 if (excess > 0 && upGaps > 0) {
                     actualUpFocus = Math.max(minUp, offsets.up - excess);
                 }
@@ -892,7 +1163,6 @@
                     }
                 }
             } else {
-                // 圧縮不要
                 for (let r = 0; r < col.length - 1; r++) {
                     gaps.push(col[r].isFaceUp ? offsets.up : offsets.down);
                 }
@@ -911,7 +1181,7 @@
                     wrapper.style.top = `${currentTop}%`;
                     
                     if (isInitial) {
-                        wrapper.offsetHeight; // 強制リフローして即座に適用
+                        wrapper.offsetHeight; 
                         wrapper.style.transition = 'top 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)';
                     }
                 }
@@ -950,14 +1220,19 @@
                     stockContainer.appendChild(cardWrapper);
                 }
             } else {
-                if (drawCount > 1) {
+                if (isGameOver || isGameCleared) {
+                    stockContainer.innerHTML = `
+                        <div class="placeholder flex items-center justify-center text-yellow-400 hover:bg-yellow-900/30 transition pointer-events-auto cursor-pointer" onclick="initGame(); event.stopPropagation();" title="Play Again">
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        </div>`;
+                } else if (drawCount > 1) {
                     stockContainer.innerHTML = `
                         <div class="placeholder flex items-center justify-center text-green-300/50 hover:bg-white/10 transition pointer-events-auto">
                             <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                         </div>`;
                 } else {
                     stockContainer.innerHTML = `
-                        <div class="placeholder flex items-center justify-center text-red-500 hover:bg-red-900/30 transition pointer-events-auto cursor-pointer">
+                        <div class="placeholder flex items-center justify-center text-red-500 hover:bg-red-900/30 transition pointer-events-auto cursor-pointer" title="Give Up">
                             <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                         </div>`;
                 }
@@ -1018,7 +1293,6 @@
                 
                 colDiv.innerHTML = `<div class="placeholder absolute inset-0"></div>`;
                 
-                // 列からマウスが外れたらフォーカスを先頭に戻す
                 colDiv.addEventListener('pointerleave', () => {
                     if (isAnimating || isGameOver || dragCtx) return;
                     if (colDiv.dataset.isCompressed === 'true') {
@@ -1033,18 +1307,17 @@
                     cardWrapper.className = 'absolute w-full h-full card-wrapper-real';
                     cardWrapper.id = `card-wrapper-${card.id}`;
                     cardWrapper.style.zIndex = row + 1;
-                    cardWrapper.style.top = `0%`; // 初期配置。後で更新
+                    cardWrapper.style.top = `0%`; 
 
                     cardWrapper.innerHTML = getCardHTML(card);
                     
                     if (card.isFaceUp) {
                         cardWrapper.onpointerdown = (e) => handlePointerDown(e, 'tableau', i, row);
                         
-                        // アコーディオンのためのホバー処理
                         cardWrapper.addEventListener('pointerenter', () => {
                             if (isAnimating || isGameOver || dragCtx) return;
                             if (colDiv.dataset.isCompressed === 'true') {
-                                if (row === col.length - 1) return; // 一番手前のカードは常に全体が見えるので無視
+                                if (row === col.length - 1) return; 
                                 colDiv.dataset.focusedRow = row;
                                 updateColumnLayout(i);
                             }
@@ -1056,12 +1329,11 @@
                 tableauContainer.appendChild(colDiv);
             }
             
-            // 全てのDOMを構築後にレイアウトを計算し適用（初期描画はアニメーションなし）
             for (let i = 0; i < 7; i++) {
                 updateColumnLayout(i, true);
             }
             
-            if (!isGameOver) {
+            if (!isGameOver && !isGameCleared) {
                 checkWin();
                 updateHintGlow();
             }
@@ -1071,7 +1343,6 @@
             for (let i = 0; i < 7; i++) updateColumnLayout(i, true);
         });
 
-        // --- ドラッグ＆ドロップ ＋ スマートタップ 実装 ---
         let dragCtx = null;
 
         function handlePointerDown(e, source, colIdx, rowIdx) {
@@ -1127,7 +1398,7 @@
             doms.forEach((dom, i) => {
                 const clone = dom.cloneNode(true);
                 clone.style.position = 'absolute';
-                clone.style.transition = 'none'; // マウス追従を妨げないため
+                clone.style.transition = 'none'; 
                 clone.style.left = `${firstRect.left + offsets[i].x}px`;
                 clone.style.top = `${firstRect.top + offsets[i].y}px`;
                 clone.style.width = `${firstRect.width}px`;
@@ -1388,6 +1659,25 @@
             });
         }
 
+        function saveClearLevel(clearedDrawCount) {
+            let points = parseInt(localStorage.getItem('solitaire321_points') || '0');
+            
+            // 旧バージョンのセーブデータ移行
+            if (points === 0) {
+                let oldMax = parseInt(localStorage.getItem('solitaire321_max_clear') || '0');
+                if (oldMax === 3) points = 100;
+                else if (oldMax === 2) points = 10;
+                else if (oldMax === 1) points = 1;
+            }
+
+            if (clearedDrawCount === 1) points += 1;
+            else if (clearedDrawCount === 2) points += 10;
+            else if (clearedDrawCount === 3) points += 100;
+
+            localStorage.setItem('solitaire321_points', points);
+            updateStoryVisibility();
+        }
+
         function playWinAnimation() {
             if (drawCount === 1) {
                 playCrackerSound();
@@ -1432,13 +1722,20 @@
         }
 
         function checkWin() {
-            if (isAnimating || isGameOver) return; 
+            if (isAnimating || isGameOver || isGameCleared || isClearing) return; 
 
             const isWin = foundations.every(pile => pile.length === 13);
             if (isWin) {
+                isClearing = true;
+                const dealId = currentDealId;
                 setTimeout(() => {
+                    if (dealId !== currentDealId) return;
+                    isGameCleared = true;
+                    isClearing = false;
+                    renderBoard();
                     playWinAnimation();
                     showClearText();
+                    saveClearLevel(drawCount); 
                 }, 500);
                 return;
             }
@@ -1487,10 +1784,16 @@
             if (dealId === currentDealId) {
                 isAnimating = false;
                 const isWin = foundations.every(pile => pile.length === 13);
-                if (isWin) {
+                if (isWin && !isGameCleared && !isClearing) {
+                    isClearing = true;
                     setTimeout(() => {
+                        if (dealId !== currentDealId) return;
+                        isGameCleared = true;
+                        isClearing = false;
+                        renderBoard();
                         playWinAnimation();
                         showClearText();
+                        saveClearLevel(drawCount); 
                     }, 500); 
                 }
             }
@@ -1776,7 +2079,37 @@
             initGame();
         }
 
+        function updateStoryVisibility() {
+            let points = parseInt(localStorage.getItem('solitaire321_points') || '0');
+            
+            // 起動時の旧バージョンセーブデータ移行
+            if (points === 0) {
+                let oldMax = parseInt(localStorage.getItem('solitaire321_max_clear') || '0');
+                if (oldMax === 3) points = 100;
+                else if (oldMax === 2) points = 10;
+                else if (oldMax === 1) points = 1;
+                if (points > 0) localStorage.setItem('solitaire321_points', points);
+            }
+            
+            const langs = ['en', 'ja', 'zh-TW'];
+            langs.forEach(lang => {
+                if (points >= 1) {
+                    const content2 = document.getElementById(`${lang}-chap2-content`);
+                    if (content2) content2.classList.remove('hidden');
+                }
+                if (points >= 10) {
+                    const content3 = document.getElementById(`${lang}-chap3-content`);
+                    if (content3) content3.classList.remove('hidden');
+                }
+                if (points >= 100) {
+                    const content4 = document.getElementById(`${lang}-chap4-content`);
+                    if (content4) content4.classList.remove('hidden');
+                }
+            });
+        }
+
         initGame();
+        updateStoryVisibility();
     </script>
 </body>
 </html>
