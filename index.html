@@ -273,7 +273,7 @@
         </h2>
     </div>
 
-    <div id="confirm-modal" class="modal fixed inset-0 hidden items-center justify-center z-[60]">
+    <div id="confirm-modal" class="modal fixed inset-0 hidden items-center justify-center z-[60]" onclick="if(event.target === this) closeConfirmModal()">
         <div class="bg-[#1a1a1a] border border-gray-700 p-6 rounded-lg shadow-2xl text-center max-w-xs sm:max-w-sm w-full mx-4">
             <h2 class="text-xl sm:text-2xl title-font font-bold mb-4 text-white">Restart Game</h2>
             <p id="confirm-message" class="text-sm sm:text-base text-gray-300 mb-6">Are you sure you want to restart?</p>
@@ -285,17 +285,17 @@
     </div>
 
     <!-- Help & Story Modal -->
-    <div id="help-modal" class="modal fixed inset-0 hidden items-center justify-center z-[60]">
-        <div class="bg-[#1a1a1a] border border-gray-700 p-6 rounded-lg shadow-2xl text-left max-w-sm sm:max-w-xl w-full mx-4 flex flex-col">
+    <div id="help-modal" class="modal fixed inset-0 hidden items-center justify-center z-[60]" onclick="if(event.target === this) closeHelpModal()">
+        <div class="bg-[#1a1a1a] border border-gray-700 p-4 sm:p-6 rounded-lg shadow-2xl text-left max-w-sm sm:max-w-xl w-full mx-4 flex flex-col max-h-[90vh]">
             <!-- Tabs -->
-            <div class="flex border-b border-gray-700 mb-4 shrink-0">
+            <div class="flex border-b border-gray-700 mb-3 sm:mb-4 shrink-0">
                 <button onclick="switchLanguage('en')" id="tab-en" class="flex-1 py-2 text-center text-sm font-semibold border-b-2 border-yellow-500 text-yellow-400 transition-colors">English</button>
                 <button onclick="switchLanguage('ja')" id="tab-ja" class="flex-1 py-2 text-center text-sm font-semibold border-b-2 border-transparent text-gray-400 hover:text-gray-200 transition-colors">日本語</button>
                 <button onclick="switchLanguage('zh-TW')" id="tab-zh-TW" class="flex-1 py-2 text-center text-sm font-semibold border-b-2 border-transparent text-gray-400 hover:text-gray-200 transition-colors">繁體中文</button>
             </div>
 
             <!-- スクロール領域 -->
-            <div class="relative overflow-y-auto custom-scrollbar pr-3 h-[300px] sm:h-[480px]">
+            <div class="relative overflow-y-auto custom-scrollbar pr-2 sm:pr-3 flex-1 min-h-0">
                 
                 <!-- =============== English =============== -->
                 <div id="content-en" class="block space-y-2 pb-2">
@@ -324,9 +324,9 @@
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
                                     <p>This "3-2-1" rule was our "house rule," played daily by my late father.</p>
                                     <p>When I was a child, I would sometimes wake up in the middle of the night to go to the bathroom and see a faint light leaking from the crack of my father's door. Peeking in, I would see him quietly playing Solitaire all by himself. His profile as he silently moved the cards still remains mysteriously etched in my mind.</p>
-                                    <p>He played until the cards were worn out, immediately replacing them with a new deck when they got damaged. Because of this, we always had a spare, unopened deck of cards at home.</p>
+                                    <p>He played until the cards were worn out, immediately replacing them with a new deck when they got damaged, so we always had a spare, unopened deck of cards at home.</p>
                                     <p>Some time after he passed away, while sorting through his belongings, I found a brand-new deck of cards still wrapped in plastic, just like back then. The moment I picked up that box, the midnight lights and the crisp sound of him flicking the cards vividly returned to me.</p>
-                                    <p>While I was immersed in these memories, my mother found the deck and immediately tried to open it, saying, "Perfect, now we don't have to buy a new one." She, too, played by this exact same rule whenever she had free time. But the cards she was using back then were so worn out they had to be reinforced with tape.</p>
+                                    <p>While I was immersed in these memories, my mother found the deck and immediately tried to open it, saying, "Perfect, now we don't have to buy a new one." She, too, played by this exact same rule whenever she had free time, but the cards she was using back then were so worn out they had to be reinforced with tape.</p>
                                     <p>But for some reason, I didn't want her to open that brand-new deck, and I frantically stopped her. I couldn't explain why, but I just wanted to leave that plastic-wrapped box exactly as it was. Calming her down and rushing to a 100-yen shop to buy another deck is now a fond memory.</p>
                                 </div>
                             </details>
@@ -339,14 +339,22 @@
                                 </summary>
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
                                     <p>It took me a considerable amount of time to realize that this "3-2-1" rule was not "normal."</p>
-                                    <p>When I first saw Solitaire on Windows, I played it with a sense of nostalgia, thinking it was the game I used to play as a child. However, seeing that it kept drawing "3 cards, 3 cards" no matter how many times I flipped, I thought: "Huh? I guess there are strange local rules like this in the world."</p>
+                                    <p>To tell the truth, I knew the rules of that game, but I didn't know its name. When I first saw that screen on Windows, I immediately understood, "Oh, it's that card game we always play!" while simultaneously feeling like it had finally been given a name: "Wow, so that was called Solitaire."</p>
+                                    <p>I don't even remember when I learned that the game's actual name was "Klondike," or what I thought at the time. However, with my current sensibilities, the name "Klondike" doesn't ring a bell at all; to me, that game will always be "Solitaire."</p>
+                                    <p>And when I saw the Windows version continuously drawing "3 cards, 3 cards" no matter how many times I flipped, I thought:</p>
+                                    <p>"Huh? What a strange rule."</p>
                                     <p>At the time, it didn't even cross my mind that my way was the "different" one. To me, "3-2-1" was the absolute official rule, and I naturally assumed that Windows had adopted some obscure special variant.</p>
                                     <p>Windows Solitaire didn't evoke much emotion beyond nostalgia, and since there were plenty of other games, I didn't pursue it deeply and just played casually.</p>
-                                    <p>However, later on, whenever I touched browser versions or app collections of card games, I slowly began to feel that "drawing 3" was the mainstream in the world. Around that time, I finally arrived at a hypothesis: "...Could it be that my way was the local rule?" Still, my trust in this rule didn't waver. If a proper company released a game, they would surely follow the official rules. But this, I believed, was a "major local rule that everyone plays, even if it's not official."</p>
+                                    <p>However, later on, whenever I touched browser versions or app collections of card games, I slowly began to feel that "drawing 3" was the mainstream in the world. Around that time, I finally arrived at a hypothesis:</p>
+                                    <p>"...Could it be that my way was the local rule?"</p>
+                                    <p>Still, my trust in this rule didn't waver. If a proper company released a game, they would surely follow the official rules. But this, I believed, was a "major local rule that everyone plays, even if it's not official."</p>
                                     <p>Time passed, and it was only recently that I started investigating it seriously. After creating a few games using the trending "vibe coding," I remembered this Solitaire rule when thinking about what to make next. Since it's a major local rule, someone might have already made it. I didn't want to just create a carbon copy, so I started searching for existing examples.</p>
                                     <p>To my surprise, whether I asked ChatGPT or other generative AIs, they all dismissed it, saying, "Such a rule does not exist." I scoured various Klondike strategy sites, but the local rules that came up were things like "unlimited recycling of the stock" or "placing cards other than Kings in empty columns." I couldn't find a highly game-like rule such as "3-2-1" anywhere.</p>
                                     <p>However, while the AIs stated the rule itself didn't exist, they unanimously praised it: "That is a very interesting and logical rule." Those words gave me a strong push. No one is doing it, but it's a good rule. That makes it all the more worth creating—I gained confidence.</p>
-                                    <p>"...But what on earth was that rule?" I was struck by an inexplicable feeling, but at the same time, the conviction that "no one else is making this" turned into a solid confidence. In that case, there is a meaning in me making it. Without hesitation, I typed in the prompt: "Gemini, create a Solitaire game where the hand changes from 3 cards, to 2 cards, to 1 card." This was the beginning of this project.</p>
+                                    <p>"...But what on earth was that rule?"</p>
+                                    <p>I was struck by an inexplicable feeling, but at the same time, the conviction that "no one else is making this" turned into a solid confidence. In that case, there is a meaning in me making it. I typed the prompt without hesitation:</p>
+                                    <p>"Gemini, create a Solitaire game where the hand changes from 3 cards, to 2 cards, to 1 card."</p>
+                                    <p>This was the beginning of this project.</p>
                                 </div>
                             </details>
 
@@ -357,18 +365,26 @@
                                     <span class="transform group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
-                                    <p>"Do this here, do that there." As I gave detailed instructions to the AI while recalling the physical feeling of playing the game, my father's image gradually began to cross my mind. The rhythm left in my fingertips, the sensation of flipping the cards. The more I put them into words, the more a vague thought surfaced: maybe this rule was something my father came up with himself.</p>
+                                    <p>"Do this here, do that there."</p>
+                                    <p>As I gave detailed instructions to the AI while recalling the physical feeling of playing the game, my father's image gradually began to cross my mind. The rhythm left in my fingertips, the sensation of flipping the cards. The more I put them into words, the more a vague thought surfaced: maybe this rule was something my father came up with himself.</p>
                                     <p>Therefore, I decided to give this game the subtitle "Father's Edition."</p>
                                     <p>While talking to Gemini about my father, recounting various anecdotes, I suddenly remembered. There should be an old playing card rulebook back at my parents' house.</p>
-                                    <p>I had given it the grand title "Father's Edition," but what if this rule was actually written in that book as a matter of course? Looking back, I remembered playing competitive games like Poker, Speed, Sevens, and Old Maid with friends, but I had no memory of ever discussing Solitaire. Perhaps "3-2-1" used to be official, but since single-player games weren't as popular as competitive ones, it simply got replaced and cemented as "fixed 3 cards" with the advent of Windows. Maybe the old book would list this as the correct rule. With such faint hopes, I dug out the old book. Even at this stage, I still believed that "3-2-1" was the official rule.</p>
+                                    <p>I had given it the grand title "Father's Edition," but what if this rule was actually written in that book as a matter of course?</p>
+                                    <p>Looking back, I remember playing competitive games like Poker, Speed, Sevens, and Old Maid with friends, but I have no memory of ever discussing Solitaire with anyone. I knew the rules only because my father played it almost every day, but I didn't even know its name. That's probably because Solitaire was not yet a mainstream game in the world at that time.</p>
+                                    <p>That's why, just as the name "Solitaire" became established by the Windows version even though its real name is "Klondike," perhaps "3-2-1" was originally the official rule, but it was simply overwritten by "fixed 3 cards" as the global standard due to the explosive spread of Windows.</p>
+                                    <p>Maybe the old book would list this as the correct rule. With such faint hopes, I dug out the old book sleeping at home. Even at this stage, I still believed that "3-2-1" was the official rule.</p>
                                     <p>However, the first thing that jumped to my eyes when I opened the book was a casual cross-out mark, and my father's handwriting next to it saying, "Then 2 cards, then 1 card."</p>
                                     <p>Thinking it couldn't be, I read on, and sure enough. The book's explanation read, "If you still cannot finish after playing all the cards from your hand, turn the waste pile back into the stock and draw 3 cards at a time again." My father had forcefully crossed out the "again 3 cards" part and added his own correct answer.</p>
+                                    <p>My father was stubborn; he was the kind of person who would never yield if he believed he was right. He also had the meticulousness to draw a line and write in a correction whenever he found a typo in a book.</p>
+                                    <p>It differed from the rule he knew, so he corrected this book, believing it to be wrong. Come to think of it, I am doing exactly the same thing right now.</p>
+                                    <p>I am desperately searching for proof that the world's standard rule is a "mistake" and that the rule I know is the "correct answer." My father, who wrote in the rulebook, must have felt the same way I do now. Thinking about this fills me with an indescribable sense of deep emotion.</p>
                                     <p>I flipped through the pages wondering if there were any other corrected pages, but no matter how much I searched, the Klondike page was the only one my father had taken a pen to.</p>
-                                    <p>When I reached the very last page, I found his signature.<br>
-                                    "1978.1.13. Friday,"<br>
+                                    <p>When I reached the very last page, I found his signature.</p>
+                                    <p>"1978.1.13. Friday,"<br>
                                     "Tanaka-machi, Toyama City **"<br>
                                     "Makoto Ono"</p>
-                                    <p>The date and address carefully written in my father's handwriting, along with his signature. For the second stroke of the character "大" (O), after writing it once, perhaps he didn't like it, he extended it smoothly for about two lines over the original stroke. Matching this, the sweeping strokes of "野" (no) and "誠" (Makoto) were also slightly elongated, and the word "Friday" was written in flowing cursive.</p>
+                                    <p>The date and address carefully written in my father's handwriting, along with his signature.</p>
+                                    <p>For the second stroke of the character "大" (O), after writing it once, perhaps he didn't like it, he extended it smoothly for about two lines over the original stroke. Matching this, the sweeping strokes of "野" (no) and "誠" (Makoto) were also slightly elongated, and the word "Friday" was written in flowing cursive.</p>
                                     <p>That meticulousness and slight "showiness" was exactly the father I knew.</p>
                                     <p>As I looked at that handwriting, a thought occurred to me. Perhaps my father correcting the book was a kind of pride. "My rule is more fun." He must have had that conviction.</p>
                                     <p>Come to think of it, I am now turning this rule that cannot be found anywhere into a game and broadcasting it to the world. "Look, isn't this rule fun?" The only difference is whether he wrote it in a book or I released it on the internet; I might be doing the exact same thing as my father.</p>
@@ -382,16 +398,19 @@
                                     <span class="transform group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
-                                    <p>In the end, the origin of this rule remains unknown. Perhaps it was passed down from an even older generation, from my grandfather.</p>
+                                    <p>In the end, the origin of this rule remains unknown.</p>
+                                    <p>Perhaps it was passed down from an even older generation, from my grandfather.</p>
                                     <p>My grandfather once played cards with American soldiers during the war, and he taught our family the Rummy he learned then. I vaguely remember him bragging, "I was strong back then."</p>
                                     <p>However, I cannot say for sure whether this rule was passed from my grandfather to my father. By the time I was old enough to understand, they were already estranged, and I couldn't even imagine them happily playing cards together.</p>
                                     <p>My father was deaf, but my grandfather could not use sign language at all. This is just my imagination, but perhaps my grandfather forcing my father to lip-read and speak was his own clumsy parental love, hoping his deaf son wouldn't struggle in society when he grew up. He must have been desperately worried about my father's future. That's how I think of it now.</p>
                                     <p>But from my father's perspective at the time, my grandfather might have seemed like "someone who wouldn't learn sign language for me." Such misunderstandings must have created a deep rift between them. My sister and I naturally grew attached to our grandparents, who could hear our voices, but that, too, might have been complicated for my father.</p>
                                     <p>My father playing Solitaire alone late into the night might have been a quiet habit and a means of escape he found while living with a strict grandfather with whom he couldn't share a common language.</p>
                                     <p>Did he learn it from someone, or did he come up with it himself? A rule that starts with "draw 3" (difficult), steps down to "draw 2," and ends with "draw 1" (easy).</p>
-                                    <p>The wall of "luck" when drawing 3 is finally overcome by giving every card a chance when drawing 1. Easier than drawing 3, but more challenging than drawing 1. This exquisite balance feels very much like an invention of my father, who loved games.</p>
+                                    <p>The wall of "luck" when drawing 3 is finally overcome by giving every card a chance when drawing 1.</p>
+                                    <p>Easier than drawing 3, but more challenging than drawing 1.</p>
+                                    <p>This exquisite balance feels very much like an invention of my father, who loved games.</p>
                                     <p>This light, which might have stopped passing from father to son, has now been reignited in the new form of a program. Even if it exists in no official records, this rule was certainly breathing on the other side of our family's playing cards.</p>
-                                    <p>This game is filled with such family memories and the small pride of a man who believed, "This is right." I sincerely hope you all enjoy this rule that my father loved so much.</p>
+                                    <p>This game is filled with such family memories and the small pride of two men who believed, "This is right." I sincerely hope you all enjoy this rule that my father loved so much.</p>
                                 </div>
                             </details>
                         </div>
@@ -440,15 +459,21 @@
                                 </summary>
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
                                     <p>私がこの「3-2-1」というルールが「普通ではない」と気づくのには、かなりの時間を要しました。</p>
-                                    <p>Windowsで初めてソリティアを見た時、子供の頃によく遊んだあのゲームか、と懐かしい気持ちで遊んでみました。しかし、何度めくっても「3枚、3枚」とずっと同じ枚数が続くのを見て、私はこう思いました。「あれ？ 世の中にはこういう変なローカルルールもあるんだな」</p>
-                                    <p>自分のほうが「違う」なんて、その時はつゆほどにも思っていなかったのです。自分の中では「3-2-1」こそが絶対的な公式ルールであり、Windowsのほうがどこかの特殊なルールを採用しているのだと、ごく自然に受け止めていました。</p>
+                                    <p>実を言うと、私はあのゲームのルールは知っていましたが、名前までは知りませんでした。初めてWindowsであの画面を見た時、「あ、いつもやってたあのトランプゲームじゃん！」と即座に理解したのと同時に、「へー、あれはソリティアっていう名前だったのか」と、そこで初めて名前を与えられたような感覚になったのです。</p>
+                                    <p>このゲームの本来の名前は「クロンダイク」だと知ったのが、いつだったか、その時どう思ったかすら今はもう覚えていません。ただ、今現在の感覚で言えば、「クロンダイク」と言われても全くピンとこず、私にとってあのゲームはどこまでいっても「ソリティア」なのです。</p>
+                                    <p>そして、Windows版で何度めくっても「3枚、3枚」とずっと同じ枚数が続くのを見て、私はこう思いました。</p>
+                                    <p>「あれ？ 変なルールだな」</p>
+                                    <p>自分のほうが「違う」なんて、その時はつゆほども思っていなかったのです。自分の中では「3-2-1」こそが絶対的な公式ルールであり、Windowsのほうがどこかの特殊なルールを採用しているのだと、ごく自然に受け止めていました。</p>
                                     <p>Windows版のソリティアにも懐かしい以上の感情は湧かず、他にもゲームはいくらでもあったので、当時は深く追求することもなく、そのまま遊び流していました。</p>
-                                    <p>しかしその後、ブラウザ版やトランプゲームの詰め合わせのようなアプリを触るたびに、世間では「3枚めくり」が主流なのだとじわじわと感じ始めました。その頃になってようやく、私は一つの仮説に辿り着きます。「……もしかして、俺のほうがローカルルールだったのか？」</p>
+                                    <p>しかしその後、ブラウザ版やトランプゲームの詰め合わせのようなアプリを触るたびに、世間では「3枚めくり」が主流なのだとじわじわと感じ始め、その頃になってようやく、私は一つの仮説に辿り着きます。 </p>
+                                    <p>「……もしかして、俺のほうがローカルルールだったのか？」</p>
                                     <p>それでも、自分の中ではこのルールへの信頼は揺らぎませんでした。ちゃんとした企業が出しているゲームなら、そりゃあ公式ルールに則って出すだろう。けれど、これは「公式ではないけれど、みんながやっているメジャーなローカルルール」なのだ。そう信じていたのです。</p>
                                     <p>そうして時が経ち、本格的に調べ始めたのは、最近のことです。流行りの「バイブコーディング」で何個かゲームを作ったあと、さて次は何作ろうかと思った時に思い出したのが、このルールのソリティアでした。メジャーなローカルルールだから、すでに個人で作っている人がいるかもしれない。二番煎じだったら作るのをやめよう。そう思って、先行事例を探すために調べ始めました。</p>
                                     <p>ところが、ChatGPTに聞いても、他の生成AIに尋ねても、「そんなルールは存在しない」と一蹴される始末。色々なクロンダイクの解説サイトを巡ってみましたが、出てくるローカルルールといえば「山札の再利用が無制限」であったり、「空列にキング以外も置ける」といった類のものばかり。「3-2-1」なんて、いかにもゲーム的なルールはどこにも見当たりませんでした。</p>
                                     <p>しかし、AIたちはルールそのものは存在しないと言いつつも、「それは非常に面白い、理にかなったルールですね」と口を揃えて褒めてくれた。その言葉が、私の背中を強く押しました。誰もやっていない、けれど良いルールなのだ。それなら余計に作る価値があるじゃないか、と自信を持つことができたのです。</p>
-                                    <p>「……でも、あのルールはいったい何だったんだ？」得体の知れない感覚に襲われましたが、同時に「これを作っている人は他にいない」という確信が、一つの確かな自信へと変わりました。それなら、自分が作る意味がある。私は迷わずプロンプトを打ち込みました。「Gemini、手札が３枚、２枚、１枚と変わっていくソリティアを作って」</p>
+                                    <p>「……でも、あのルールはいったい何だったんだ？」</p>
+                                    <p>得体の知れない感覚に襲われましたが、同時に「これを作っている人は他にいない」という確信が、一つの確かな自信へと変わりました。それなら、自分が作る意味がある。私は迷わずプロンプトを打ち込みました。</p>
+                                    <p>「Gemini、手札が３枚、２枚、１枚と変わっていくソリティアを作って」</p>
                                     <p>これが、このプロジェクトの始まりでした。</p>
                                 </div>
                             </details>
@@ -460,18 +485,27 @@
                                     <span class="transform group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
-                                    <p>「ここはこうして、あそこはああして」 実物でのプレイ感覚を思い出しながら、AIに細かな指示を出していると、次第に父の姿が脳裏をよぎり始めました。指先に残るリズム、カードをめくる感覚.。それらを言葉にしていくほどに、もしかしたらこのルールは、父が自分自身で考え出したものだったのかもしれない、という思いが漠然と湧き上がってきたのです。</p>
+                                    <p>「ここはこうして、あそこはああして」</p>
+                                    <p>実物でのプレイ感覚を思い出しながら、AIに細かな指示を出していると、次第に父の姿が脳裏をよぎり始めました。指先に残るリズム、カードをめくる感覚.。それらを言葉にしていくほどに、もしかしたらこのルールは、父が自分自身で考え出したものだったのかもしれない、という思いが漠然と湧き上がってきたのです。</p>
                                     <p>そこで私は、このゲームに『Father's Edition』というサブタイトルを冠することにしました。</p>
                                     <p>Geminiに父のことを語り、あんなことがあった、こんなことがあったと話しているうちに、ふと思い出したのです。たしか実家には、古いトランプのルール本があったはずだ、と。</p>
-                                    <p>『Father's Edition』なんて大層な名前を付けてしまったけれど、もしかしたらあの本には、当たり前のようにこのルールが載っているのではないか。思い返せば、ポーカーやスピード、７並べ、ババ抜きなどの対戦ゲームは友人と遊んだ記憶があるが、ソリティアについて話をした覚えがない。かつて「3-2-1」こそが公式だったけど、対戦ゲームなどに比べ、一人用はそこまで流行らず、Windowsの登場によって「3枚固定」に取って代わられて定着してしまっただけなのではないか。古い本にはこちらが正解として載っているかもしれない。そんな淡い期待を抱いて、私は古い本を引っ張り出してきました。 この期に及んでもなお、私は「3-2-1」が、公式であると信じていたのです。</p>
+                                    <p>『Father's Edition』なんて大層な名前を付けてしまったけれど、もしかしたらあの本には、当たり前のようにこのルールが載っているのではないか。</p>
+                                    <p>思い返せば、ポーカーやスピード、７並べ、ババ抜きなどの対戦ゲームは友人と遊んだ記憶がありますが、ソリティアについて誰かと話をした覚えはありません。父が毎日のようにプレイしていたからこそ私はルールを知っていましたが、名前すら知らなかった。それは、当時の世間ではまだ、ソリティアはメジャーな遊びではなかったからでしょう。</p>
+                                    <p>だからこそ、本当の名前は「クロンダイク」なのに、Windows版によって「ソリティア」という名前が定着してしまったように。本当は「3-2-1」こそが本来の公式ルールだったのに、Windowsの爆発的な普及によって、「３枚ずつ」のほうが世界のスタンダードとして塗り替えられてしまっただけなのではないか。</p>
+                                    <p>古い本には、こちらが正解として載っているかもしれない。そんな淡い期待を抱いて、私は家に眠る古い本を引っ張り出してきました。この期に及んでもなお、私は「3-2-1」こそが、公式ルールであると信じていたのです。</p>
                                     <p>ところが、本を開いて最初に目に飛び込んできたのは、無造作なバッテン印と、その横に書かれた「次は２枚，次一枚．」という父の筆跡でした。</p>
                                     <p>まさかと思って読んでみると、案の定。 本の解説には『手札を全部出してもでき上がらなかったら、もう一度捨札を手札にして、また３枚ずつめくっていきます。』とあり、父はその”また３枚”という箇所を力強く打ち消し、自分なりの正解を書き足していたのです。</p>
+                                    <p>父は頑固で、自分が正しいと思えば決して譲らない人で、本に誤字を見つけると、線を引いて訂正を書き込むような、そんな几帳面さも持っていました。</p>
+                                    <p>自分の知っているルールと違う、この本は間違っていると修正を入れた。思えば、今の自分も全く同じことをしています。</p>
+                                    <p>世の中の標準ルールが「間違い」で、自分の知っているルールこそが「正解」であるという証拠を、必死になって探し求めている。<br>
+                                    ルール本に書き込んだ父も、今の自分と同じ気持ちだったのではないか。そう思うと、なんだか言いようのない感慨深さがこみ上げてきます。</p>
                                     <p>他にもどこか修正しているページがあるのではないかと、私はパラパラとページをめくってみましたが、どれだけ探しても、父がペンを入れたのはクロンダイクのページだけでした。</p>
-                                    <p>そのまま最後のページまで辿り着いたとき、私はその署名を見つけました。<br>
-                                    「1978.1.13. Friday,」<br>
+                                    <p>そのまま最後のページまで辿り着いたとき、私はその署名を見つけました。</p>
+                                    <p>「1978.1.13. Friday,」<br>
                                     「富山市田中町※※」<br>
                                     「大野誠」 </p>
-                                    <p>父の字で丁寧に記された日付と住所、そして署名。「大」という字の二画目の払いを、一度書いたあと、気に入らなかったのか上から二行分ほど長くスッと伸ばした筆跡。それに合わせるように「野」と「誠」の払いも少し長くなっていて、しかも「Friday」の文字は、流れるような筆記体で書かれている。</p>
+                                    <p>父の字で丁寧に記された日付と住所、そして署名。</p>
+                                    <p>「大」という字の二画目の払いを、一度書いたあと、気に入らなかったのか上から二行分ほど長くスッと伸ばした筆跡。それに合わせるように「野」と「誠」の払いも少し長くなっていて、しかも「Friday」の文字は、流れるような筆記体で書かれている。</p>
                                     <p>その几帳面さと、ちょっとした“かっこつけ”は、まさに私の知る父そのものでした。</p>
                                     <p>その筆跡を見ているうちに、ふと思ったのです。 父が本を訂正したのは、一種のプライドだったのではないか。 「俺のルールのほうが面白い」 そんな確信があったのではないか。</p>
                                     <p>思えば、私も今、どこにも見つからないこのルールをゲームにして、世界に発信しようとしています。「どうだ、このルールは面白いだろう」と。それを本に書き込んだのか、ネットに放流したのかの違いだけで、私は父と全く同じことをしているのかもしれません。</p>
@@ -485,16 +519,19 @@
                                     <span class="transform group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
-                                    <p>このルールの起源は、結局のところ分かりません。もしかしたら、さらに上の世代、祖父から伝わったものだったのでしょうか。</p>
+                                    <p>このルールの起源は、結局のところ分かりません。</p>
+                                    <p>もしかしたら、さらに上の世代、祖父から伝わったものだったのでしょうか。</p>
                                     <p>祖父は戦時中、アメリカ兵とトランプ勝負をしたことがあり、その時に覚えたラミーを家族に教えてくれたことがあります。「そのときは強かった」と自慢げに話していたのを、私は朧げながら覚えています。</p>
                                     <p>しかし、このルールが祖父から父へ伝わったものなのかどうか、実のところ私は断言できません。私が物心ついた頃には、二人はすでに仲違いしていて、仲良くトランプをしていた姿なんて想像もできないからです。</p>
                                     <p>父は聾者でしたが、祖父は手話を一切使えませんでした。これは私の想像でしかありませんが、祖父が父に口話を強いたのは、耳が聞こえない息子が大人になってから社会で苦労しないようにという、彼なりの不器用な親心だったのかもしれません。父の将来を案じる必死さがあったのではないか。今になって、私はそんな風に思うのです。</p>
                                     <p>けれど当時の父から見れば、それは「自分のために手話を覚えてくれない人」に映ったのかもしれません。そんなすれ違いが、二人の間に深い溝を生んでしまったのでしょう。私や姉は、声が通じる祖父母に自然と懐きましたが、それもまた、父にとっては複雑だったのかもしれません。</p>
                                     <p>父が夜遅くまで一人でソリティアに興じていたのは、言葉の通じない厳格な祖父との生活の中で見つけた、静かな習慣であり、逃避行だったのかもしれません。</p>
-                                    <p>そんな父が、誰かから教わったのか、あるいは自分で考え出したのか。「3枚ずつ（難しい）」から始まり、次に「2枚ずつ」、最後は「1枚ずつ（簡単）」へと段階を踏んでいくこのルール。</p>
-                                    <p>3枚ずつでは絶対に動かせないカードが出てくる「運」の壁を、最後は1枚ずつめくることで、すべてのカードにチャンスを与える。3枚めくりよりは易しく、1枚めくりよりは歯応えがある。この絶妙な塩梅は、いかにもゲームを愛した父らしい発明のように思えるのです。</p>
+                                    <p>そんな父が、誰かから教わったのか、あるいは自分で考え出したのか。 「3枚ずつ（難しい）」から始まり、次に「2枚ずつ」、最後は「1枚ずつ（簡単）」へと段階を踏んでいくこのルール。</p>
+                                    <p>3枚ずつでは絶対に動かせないカードが出てくる「運」の壁を、最後は1枚ずつめくることで、すべてのカードにチャンスを与える。</p>
+                                    <p>3枚めくりよりは易しく、1枚めくりよりは歯応えがある。</p>
+                                    <p>この絶妙な塩梅は、いかにもゲームを愛した父らしい発明のように思えるのです。</p>
                                     <p>父から子へ、そこで止んでいたかもしれないこの灯は、今、プログラムという新しい形を得て再び灯されました。たとえ公式な記録にはなくても、わが家のトランプの裏側には、確かにこのルールが息づいていました。</p>
-                                    <p>このゲームには、そんな家族の記憶と、一人の男が「これが正しい」と信じた小さな誇りが詰まっています。父が愛したこのルールを、皆さんも楽しんでいただければ幸いです。</p>
+                                    <p>このゲームには、そんな家族の記憶と、二人の男が「これが正しい」と信じた小さな誇りが詰まっています。 父が愛したこのルールを、皆さんも楽しんでいただければ幸いです。</p>
                                 </div>
                             </details>
                         </div>
@@ -527,7 +564,7 @@
                                 </summary>
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
                                     <p>這個「3-2-1」的規則，是我已故父親每天玩的「家規」。</p>
-                                    <p>小時候，半夜醒來去洗手間時，偶爾會看到父親房門縫裡透出微弱的燈光。悄悄偷看，會發現他獨自一人靜靜地玩著接龍。他默默移動卡片的側臉，至今依然不可思議地留在我的腦海中。</p>
+                                    <p>小時候，半夜醒來去洗手間時，偶爾會看到父親房門縫裡透出微弱的燈光。悄悄偷看，會發現父親獨自一人靜靜地玩著接龍。他默默移動卡片的側臉，至今依然不可思議地留在我的腦海中。</p>
                                     <p>他總是把撲克牌玩到破爛不堪，一旦損壞就立刻換一副新的。因此，家裡總是有備用的、未拆封的撲克牌。</p>
                                     <p>父親過世一段時間後，在整理遺物時，我找到了一副和當年一樣、仍包著塑膠膜的全新撲克牌。拿起那個盒子的瞬間，深夜的燈光和父親彈撲克牌的清脆聲音，鮮明地浮現在我眼前。</p>
                                     <p>正當我沉浸在感概中時，母親一發現那副牌，便說：「太好了，這樣就不用買新的了」，並立刻準備拆開。母親也是一有空就會用這同一個規則玩接龍的人。但當時，母親使用的撲克牌也破爛到需要用膠帶修補。</p>
@@ -543,15 +580,22 @@
                                 </summary>
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
                                     <p>我花了相當長的時間才意識到，這個「3-2-1」的規則其實「並不普通」。</p>
-                                    <p>當我第一次在 Windows 上看到接龍時，帶著懷念的心情玩了一下，以為這是我小時候常玩的那個遊戲。然而，看到不管翻幾次都是「抽3張、抽3張」的固定數量，我心想：「咦？原來世界上還有這種奇怪的在地規則啊。」</p>
+                                    <p>老實說，我雖然知道那個遊戲的規則，卻不知道它的名字。當我第一次在 Windows 上看到那個畫面時，我立刻明白了「啊，這就是我們常玩的那個撲克牌遊戲嘛！」同時也有一種彷彿它第一次被賦予名字的感覺：「嘿～原來這叫作接龍啊。」</p>
+                                    <p>至於我到底是什麼時候知道這個遊戲本來的名字叫「克朗代克（Klondike）」，以及當時有什麼想法，現在已經完全記不得了。只是以現在的感覺來說，聽到「克朗代克」我完全沒有共鳴，對我而言，那個遊戲不管到哪裡都叫作「接龍」。</p>
+                                    <p>然後，當我看到 Windows 版不管翻幾次都是「抽3張、抽3張」的固定數量時，我心想：</p>
+                                    <p>「咦？這規則好怪啊。」</p>
                                     <p>那時我絲毫沒有想過，原來「不同」的其實是我自己。在我的認知裡，「3-2-1」才是絕對的官方規則，我很自然地認為 Windows 採用了某種特殊玩法。</p>
                                     <p>Windows 版的接龍並沒有引起我懷念之外的太多情感，加上當時還有很多其他遊戲，我也沒有深入探究，就這樣隨便玩玩過去了。</p>
-                                    <p>然而之後，每當我接觸到網頁版或撲克牌遊戲合集之類的應用程式時，我開始漸漸感覺到「抽3張」才是世上的主流。直到那時，我才終於得出一個假設：「……難道，我玩的才是所謂的在地規則？」</p>
+                                    <p>然而之後，每當我接觸到網頁版或撲克牌遊戲合集之類的應用程式時，我開始漸漸感覺到「抽3張」才是世上的主流。直到那時，我才終於得出一個假設： </p>
+                                    <p>「……難道，我玩的才是所謂的在地規則？」</p>
                                     <p>儘管如此，我對這個規則的信任依然沒有動搖。大公司出的遊戲，理當會遵循官方規則。但這個規則，我深信它是「雖然不是官方的，但大家都在玩的主流在地規則」。</p>
                                     <p>就這樣過了一段時間，直到最近我才開始認真調查這件事。在用最近流行的「vibe coding」做了幾個遊戲後，正想著接下來要做什麼時，我想起了這個規則的接龍。既然是主流的在地規則，或許早就有人自己做出來了。為了避免步人後塵，我開始尋找先例。</p>
                                     <p>然而，無論是問 ChatGPT，還是問其他生成式 AI，都被一句「不存在這種規則」給打回票。我巡視了各種克朗代克的解說網站，出現的在地規則盡是些「無限次重新洗牌」或「空格可以放國王以外的牌」之類的。「3-2-1」這種極具遊戲性的規則，到處都找不到。</p>
                                     <p>不過，儘管 AI 們說這個規則本身不存在，卻異口同聲地稱讚說：「這是一個非常有趣且合理的規則。」那句話給了我很大的動力。沒有別人在做，卻是個好規則。那不就更有製作的價值了嗎？這讓我產生了自信。</p>
-                                    <p>「……但是，那個規則到底是什麼啊？」雖然被一種難以名狀的感覺襲擊，但同時「沒有別人在做這個」的認知，也化為了一種確切的自信。既然如此，就有我來製作的意義了。我毫不猶豫地輸入了提示詞：「Gemini，幫我做一個手牌會從抽3張、抽2張變成抽1張的接龍遊戲。」這就是這個專案的起點。</p>
+                                    <p>「……但是，那個規則到底是什麼啊？」</p>
+                                    <p>雖然被一種難以名狀的感覺襲擊，但同時「沒有別人在做這個」的認知，也化為了一種確切的自信。既然如此，就有我來製作的意義了。我毫不猶豫地輸入了提示詞：</p>
+                                    <p>「Gemini，幫我做一個手牌會從抽3張、抽2張變成抽1張的接龍遊戲。」</p>
+                                    <p>這就是這個專案的起點。</p>
                                 </div>
                             </details>
 
@@ -562,18 +606,27 @@
                                     <span class="transform group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
-                                    <p>「這裡這樣改，那裡那樣做。」當我一邊回憶實際遊玩的手感，一邊對 AI 下達詳細指示時，父親的身影逐漸在腦海中浮現。指尖殘留的節奏、翻牌的觸感。越是用言語表達出來，一個模糊的想法就越是湧上心頭：或許這個規則，是父親自己想出來的。</p>
+                                    <p>「這裡這樣改，那裡那樣做。」</p>
+                                    <p>當我一邊回憶實際遊玩的手感，一邊對 AI 下達詳細指示時，父親的身影逐漸在腦海中浮現。指尖殘留的節奏、翻牌的觸感。越是用言語表達出來，一個模糊的想法就越是湧上心頭：或許這個規則，是父親自己想出來的。</p>
                                     <p>因此，我決定為這款遊戲冠上『Father's Edition』的副標題。</p>
                                     <p>在和 Gemini 談論父親，說著那些過去的點點滴滴時，我突然想起來了。老家應該有一本舊的撲克牌規則書。</p>
-                                    <p>雖然我誇下海口取了『Father's Edition』這樣響亮的名字，但說不定那本書裡理所當然地寫著這個規則？回想起來，我有和朋友玩撲克、心臟病、排七、抽鬼牌等對戰遊戲的記憶，卻不記得有討論過接龍。或許曾經「3-2-1」才是官方規則，但比起對戰遊戲，單人遊戲沒那麼流行，隨著 Windows 的出現，才被「固定抽3張」取而代之並定型下來的吧？說不定舊書裡會把這寫作正確答案。懷著這樣一絲微弱的期待，我翻出了那本舊書。事到如今，我依然相信「3-2-1」才是官方規則。</p>
+                                    <p>雖然我誇下海口取了『Father's Edition』這樣響亮的名字，但說不定那本書裡理所當然地寫著這個規則？</p>
+                                    <p>回想起來，我有和朋友玩撲克、心臟病、排七、抽鬼牌等對戰遊戲的記憶，卻不記得有和誰討論過接龍。正因為父親幾乎每天都玩，所以我才知道規則，但我連名字都不知道。那或許是因為在當時的社會上，接龍還不是一個主流的遊戲。</p>
+                                    <p>正因如此，就像明明真正的名字是「克朗代克」，卻因為 Windows 版的關係讓「接龍」這個名字定型了一樣。說不定「3-2-1」原本才是真正的官方規則，只是因為 Windows 的爆發性普及，才讓「固定抽3張」取而代之成為了世界標準？</p>
+                                    <p>舊書裡或許會把這寫作正確答案。懷著這樣一絲微弱的期待，我翻出了沉睡在家裡的舊書。事到如今，我依然相信「3-2-1」才是官方規則。</p>
                                     <p>然而，翻開書本第一眼看到的，是一個隨手畫上的叉叉，以及旁邊用父親的筆跡寫著：「接下來抽2張，然後抽1張。」</p>
                                     <p>心想著不會吧，繼續讀下去，果不其然。書上的解說寫著：『如果手牌出完還是無法破關，就把廢牌堆重新當作牌庫，再次每次抽3張。』父親用力劃掉了「再次抽3張」的部分，並補上了他自己心中的正確答案。</p>
+                                    <p>父親是個固執的人，只要認為自己是對的就絕不妥協。他也有著一絲不苟的性格，在書裡發現錯字時，就會畫線並寫上更正。</p>
+                                    <p>因為和自己知道的規則不同，他認定這本書錯了，於是加上了修改。回想起來，現在的我正在做著完全一樣的事。</p>
+                                    <p>我正拼命尋找證據，想證明世上的標準規則是「錯誤的」，而自己知道的規則才是「正確答案」。<br>
+                                    在規則書上寫下更正的父親，或許也和現在的我是同樣的心情吧。一想到這裡，心中不禁湧起一股難以言喻的深深感觸。</p>
                                     <p>我心想說不定還有其他被修改的頁面，於是沙沙地翻著書頁，但不管怎麼找，父親動筆修改的就只有克朗代克這一頁。</p>
-                                    <p>就這樣翻到最後一頁時，我發現了他的簽名。<br>
-                                    「1978.1.13. Friday,」<br>
+                                    <p>就這樣翻到最後一頁時，我發現了他的簽名。</p>
+                                    <p>「1978.1.13. Friday,」<br>
                                     「富山市田中町※※」<br>
                                     「大野誠」</p>
-                                    <p>用父親字跡工整寫下的日期、地址和簽名。「大」字的第二筆撇，寫了一次之後，也許是不滿意，又在上面拉長了大約兩行的長度。彷彿為了配合這個，『野』和『誠』的撇也稍微拉長了些，而且「Friday」這個字還是用流暢的草書寫成的。</p>
+                                    <p>用父親字跡工整寫下的日期、地址和簽名。</p>
+                                    <p>「大」字的第二筆撇，寫了一次之後，也許是不滿意，又在上面拉長了大約兩行的長度。彷彿為了配合這個，『野』和『誠』的撇也稍微拉長了些，而且「Friday」這個字還是用流暢的草書寫成的。</p>
                                     <p>那種一絲不苟又帶點「愛耍帥」的感覺，正是我所認識的父親。</p>
                                     <p>看著那個字跡我突然想到：父親訂正那本書，或許是出於一種驕傲。「我發明的規則比較有趣。」他一定有這樣的確信。</p>
                                     <p>回想起來，我現在也是把這個找不到的規則做成遊戲向全世界發表。「怎麼樣，這個規則很有趣吧？」差別只在於他是寫在書上，而我是發布到網路上而已，我現在做的事，或許和父親如出一轍。</p>
@@ -587,16 +640,19 @@
                                     <span class="transform group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
                                 <div class="p-4 pt-0 text-sm text-gray-300 space-y-3 leading-relaxed border-t border-gray-700/50 mt-2">
-                                    <p>這個規則的起源，終究是個謎。或許它是從更上一代，從我祖父那裡傳下來的？</p>
+                                    <p>這個規則的起源，終究是個謎。</p>
+                                    <p>或許它是從更上一代，從我祖父那裡傳下來的？</p>
                                     <p>祖父在戰爭期間曾和美國大兵打過撲克牌，並把那時學會的拉米（Rummy）教給了家人。我依稀記得他得意地吹噓著「那時候我可是很強的」。</p>
                                     <p>然而，我無法斷言這個規則是否是由祖父傳給父親的。因為在我有記憶以來，他們倆的關係已經很不和睦，根本無法想像他們和樂融融地一起打牌的樣子。</p>
                                     <p>父親是個失聰者，但祖父完全不會使用手語。這只是我的想像，或許祖父強迫父親讀唇語和說話，是出於他自己笨拙的父母心，希望聽不見的兒子長大後在社會上不要太吃苦。他一定非常為父親的未來感到擔憂。事到如今，我會這麼想。</p>
                                     <p>但在當時的父親眼裡，祖父或許只是一個「不願意為了我學手語的人」。這樣的錯過，可能在他們之間產生了深深的代溝。我和姐姐自然而然地親近了能用聲音溝通的祖父母，但這對父親來說，或許也是一種複雜的心情吧。</p>
                                     <p>父親深夜獨自玩著接龍，或許是在與無法用言語溝通的嚴厲祖父共同生活的日子裡，所找到的一種寧靜習慣，以及逃避現實的方式。</p>
-                                    <p>這樣的父親，是從某人那裡學來的，還是自己想出來的呢？每次抽3張時絕對無法移動的「運氣」之牆，在最後透過每次抽1張，給予了所有卡片機會。</p>
-                                    <p>比一直抽3張簡單，又比一直抽1張更具挑戰性。這種絕妙的平衡感，怎麼看都像是熱愛遊戲的父親的發明。</p>
+                                    <p>這樣的父親，是從某人那裡學來的，還是自己想出來的呢？「抽3張（困難）」開始，接著「抽2張」，最後是「抽1張（簡單）」這樣循序漸進的規則。</p>
+                                    <p>每次抽3張時絕對無法移動的「運氣」之牆，在最後透過每次抽1張，給予了所有卡片機會。</p>
+                                    <p>比一直抽3張簡單，又比一直抽1張更具挑戰性。</p>
+                                    <p>這種絕妙的平衡感，怎麼看都像是熱愛遊戲的父親的發明。</p>
                                     <p>這盞或許原本會從父親到兒子就此熄滅的燈火，如今透過程式碼這種新形式再次被點亮了。即使沒有任何官方紀錄，但在我們家的撲克牌背後，確實鮮活地存在著這個規則。</p>
-                                    <p>這款遊戲裡，承載了這樣的家族記憶，以及一個男人堅信「這才是對的」的小小驕傲。衷心希望大家也能喜歡這個父親深愛的規則。</p>
+                                    <p>這款遊戲裡，承載了這樣的家族記憶，以及兩個男人堅信「這才是對的」的小小驕傲。衷心希望大家也能喜歡這個父親深愛的規則。</p>
                                 </div>
                             </details>
                         </div>
@@ -605,7 +661,7 @@
 
             </div>
             
-            <div class="flex justify-center mt-2 pt-4 border-t border-gray-700 shrink-0">
+            <div class="flex justify-center mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-700 shrink-0">
                 <button onclick="closeHelpModal()" class="w-full py-2.5 bg-gray-600 hover:bg-gray-500 rounded font-bold transition text-white shadow-lg">Close</button>
             </div>
         </div>
