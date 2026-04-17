@@ -3,7 +3,7 @@ name: Deploy to itch.io
 on:
   push:
     branches:
-      - main  # もしメインのブランチ名が master の場合は master に変えてください
+      - main
 
 jobs:
   deploy:
@@ -12,14 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Download itch.io official tool (butler)
-        run: |
-          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
-          unzip butler.zip
-          chmod +x butler
-
-      - name: Push to itch.io
-        env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-        run: |
-          ./butler push ./ crazysun0724/solitaire-321:html
+      - name: Deploy to itch.io
+        uses: Kikobeats/itch-publish@v1
+        with:
+          butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
+          gameData: ./
+          itchUsername: crazysun0724
+          itchGameId: solitaire-321
+          buildChannel: html
