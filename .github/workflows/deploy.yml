@@ -1,0 +1,23 @@
+name: Deploy to itch.io
+
+on:
+  push:
+    branches:
+      - main  # もしメインのブランチ名が master の場合は master に変えてください
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to itch.io
+        uses: manleydev/butler-publish-github-action@master
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+        with:
+          channel: 'html'
+          itch_user: 'crazysun0724'
+          itch_game: 'https://crazysun0724.itch.io/solitaire-321'
+          package: '.'
