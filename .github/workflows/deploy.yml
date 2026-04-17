@@ -12,12 +12,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to itch.io
-        uses: josephbmanley/butler-publish-github-action@master
+      - name: Download itch.io official tool (butler)
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+
+      - name: Push to itch.io
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-        with:
-          channel: 'html'
-          itch_user: 'crazysun0724'  # ← ここはご自身のものに書き換えてください
-          itch_game: 'https://crazysun0724.itch.io/solitaire-321' # ← ここもご自身のものに書き換えてください
-          package: '.'
+        run: |
+          ./butler push ./ crazysun0724/solitaire-321:html
